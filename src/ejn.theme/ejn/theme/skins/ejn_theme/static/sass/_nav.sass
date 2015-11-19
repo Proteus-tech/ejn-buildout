@@ -1,0 +1,145 @@
+
+// global navbar
+
+#desktop_nav
+	width: 100%
+	margin: 0
+	padding: 0
+	background: $colorE
+	@include clearfix
+
+	& > .nav
+		max-width: 960px
+		margin: 0 auto
+		padding: 0
+		@include clearfix
+	
+	li
+		float: left
+		list-style: none
+		display: inline-block
+		margin: 0
+		padding: 0
+
+	a
+		border: none
+		color: #fff
+		margin: 0
+		padding: 0.5em 0.5em 0.5em 0.5em
+		display: block
+	
+	.active
+		font-weight: bold
+	
+	.login_required
+		color: lighten( $colorE, 25% )
+		
+	.ss_icon_locked,
+	.ss_icon_search
+		font-size: 0.8em
+
+	a:hover
+		background: $colorA
+		color: #fff
+	
+	.social
+		a
+			padding: 0.5em 0.1em
+		a:hover
+			background: none
+			color: $colorA
+		
+	.first
+		margin-left: 2em
+
+
+
+// utility nav
+
+#utility_nav
+	margin: 0.25em auto 0 auto
+	max-width: 960px
+
+	ul
+		margin: 0
+		padding: 0
+
+	li
+		float: right
+		list-style: none
+		display: inline-block
+		margin: 0
+		padding: 0
+
+	a
+		border: none
+		color: $colorE
+		margin: 0
+		padding: 0.5em 0.5em 0.5em 0.5em
+		font-size: 0.88em
+
+	a:hover
+		background: none
+		color: $colorA
+			
+	
+// footer
+
+#footer 
+	@include clearfix
+	a
+		margin: 0
+		border: none
+		color: $color_text
+		white-space: nowrap
+	a:hover
+		color: $colorC
+		background: none
+	.divider
+		color: $colorE
+	.footer_social
+		margin-right: 0
+		font-size: 1.25em
+		.ss-icon
+			margin-right: 0
+			position: relative
+			top: 0.2em
+	.divider + .footer_social
+		margin-left: 0.1em
+			
+#footer_links
+	margin-right: 10%
+
+#footer_links,
+#footer_signup
+	float: left
+	margin-bottom: 1em 
+	width: 45%
+	@media screen and (max-width: 680px)
+		width: 100%
+		margin-right: 0
+		clear: both
+		
+	
+// local nav
+
+.local_nav
+	margin-bottom: 3em
+	ul
+		list-style: none
+		margin: 0
+		padding: 0
+	li
+		margin: 0 0 3px 0
+		padding: 0
+		border: 1px solid darken($colorE, 5%)
+		background: $colorE
+	a
+		border: none
+		padding: 0.5em 0 0.5em 0.5em
+		display: block
+	.icon_decorative
+		color: darken($colorE, 10%)
+		position: relative
+		top: 0.15em
+		

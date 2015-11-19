@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+
+ <object name="ejn_theme"
+    meta_type="Filesystem Directory View"
+    directory="ejn.theme:skins/ejn_theme" />
+
+ <skin-path name="*">
+
+  <layer name="ejn_theme"
+     insert-after="custom"/>
+
+
+ </skin-path>
+
+
+
+</object>

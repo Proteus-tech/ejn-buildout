@@ -1,0 +1,2 @@
+recursive-include zen *
+global-exclude *pyc

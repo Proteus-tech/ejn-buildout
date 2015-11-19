@@ -1,0 +1,169 @@
+
+// styles for front page
+#page_front
+		
+	#story_ticker
+		width: 100%
+		padding: 2em 2em 2em 2em
+		background: tint($colorE,90%)
+		@include clearfix
+		#ticker_updates
+			float: left
+			font-size: 1em
+			a
+				border: none
+				color: $color_text
+			a:hover
+				color: $colorB
+			b
+				color: $colorB
+				font-weight: bold
+			i
+				color: $colorE
+		#ticker_action
+			float: right
+			a
+				background: $colorB
+				border: none
+				color: #fff
+				padding: 8px 12px
+				@include border-radius(4px)
+			a:hover
+				background: $colorC
+				
+	#intro
+		margin: 0 0 0 0
+		padding: 3em 0 3em 10%
+		background: tint($colorE,80%)
+		background: url('/static/images/sitewide/map_bg_960.png')
+		p
+			float: left
+			width: 25%
+			margin-right: 3%
+	#intro_text
+		clear: both
+		@include clearfix
+	#intro_action
+		margin: 2em 0 0 0
+		padding: 0 10% 0 0
+		clear: both
+		text-align: right
+		a
+			background: $colorC
+			border: none
+			color: #fff
+			margin: 0 0 0 0.5em
+			padding: 8px 12px
+			@include border-radius(4px)
+		.subdued
+			background: $colorE
+		a:hover
+			background: $colorB
+
+	#stories
+		margin-top: 3em
+		
+	#resources
+		margin-top: 2em
+		padding-top: 2em
+		border-top: 1px solid tint( $colorE, 50% )
+	
+		
+	// twitter ticker
+	#twitter
+		margin: 2em 0 0 0
+		padding: 0.25em 1em 0.5em 1em
+		background: tint( $colorA, 95% )
+		& > h3,
+		& > h3 > a
+			color: $colorE
+	#twitter_ticker
+		height: 4em
+		position: relative
+		overflow-y: hidden
+		.tweet_list
+			margin: 0
+			padding: 0
+			position: absolute
+			li
+				margin: 0
+				padding: 0
+				list-style-type: none
+				height: 4em
+		a
+			border: none
+		b
+			font-weight: bold
+
+
+
+
+	// slideshow -----------------------------
+
+				
+
+	#slideshow
+		background: tint( $colorE , 10% )
+		width: 100%
+		height: 475px
+
+
+	// FlexSlider Necessary Styles
+	.flexslider
+		margin: 0
+		padding: 0
+	// Hide the slides before the JS is loaded. Avoids image jumping
+	.slides > li 
+		display: none
+		-webkit-backface-visibility: hidden
+	.slides img 
+		width: 100%
+		display: block
+
+	/* No JavaScript Fallback */
+	.no-js .slides > li:first-child 
+		display: block
+
+	#flexslider > ul 
+		margin: 0
+		padding: 0
+		background: #fff
+		border: 1px solid #eee
+		& > li
+			list-style: none
+			margin: 0
+			padding: 0
+			height: 440px
+			overflow: hidden
+
+	.flex-control-nav
+		width: 100px
+		margin: 8px 0 0 5px
+		padding: 0
+		text-align: center
+
+	.flex-control-nav li
+		margin: 0 0 0 5px
+		display: inline-block
+		zoom: 1 
+		*display: inline
+
+	.flex-control-nav li:first-child 
+		margin: 0
+
+	.flex-control-nav li a 
+		width: 13px
+		height: 13px
+		display: block
+		background: url('/static/images/front/flexslider/bg_control_nav.png') no-repeat 0 0
+		cursor: pointer
+		text-indent: -9999px
+		border: none
+
+	.flex-control-nav li a:hover 
+		background-position: 0 -13px
+
+	.flex-control-nav li a.active 
+		background-position: 0 -26px
+		cursor: default
+

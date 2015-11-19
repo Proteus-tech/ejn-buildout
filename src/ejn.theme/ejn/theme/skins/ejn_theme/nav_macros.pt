@@ -1,0 +1,86 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="plone">
+<body>
+
+
+<div metal:define-macro="aspects" id="local_nav">
+    
+    <div class="group">            
+      <h3>Regions</h3>
+      <ul>
+        <li><a href="#">The Americas</a></li>
+        <li><a href="#">Asia Pacific</a></li>
+        <li><a href="#">Europe</a></li>
+        <li><a href="#">Middle East + North Africa</a></li>
+        <li><a href="#">South Asia +Central Asia</a></li>
+        <li><a href="#">Southeast Asia + Oceania</a></li>
+        <li><a href="#">Sub-Saharan Africa</a></li>
+      </ul>
+    </div>
+    
+    <div class="group">            
+      <h3>Topics</h3>
+      <ul>
+        <li><a href="#">Agriculture</a></li>
+        <li><a href="#">Biodiversity</a></li>
+        <li><a href="#">Climate Change</a></li>
+        <li><a href="#">Cities</a></li>
+        <li><a href="#">Environmental Health</a></li>
+        <li><a href="#">Oceans</a></li>
+        <li><a href="#">Policy</a></li>
+        <li><a href="#">Journalism Skills</a></li>
+      </ul>
+    </div>
+
+</div>
+
+
+
+
+<div metal:define-macro="project" id="local_nav">
+    
+    <div class="group">            
+      <h3>Education</h3>
+      <ul>
+        <li><a href="#">Earth Journalism Scholars</a></li>
+        <li><a href="#">IUCN</a></li>
+        <li><a href="#">Rio+20</a></li>
+        <li><a href="#">Seafood Summit</a></li>
+        <li><a href="#">European Fisheries Conferences</a></li>
+      </ul>
+    </div>
+    
+    <div class="group">            
+      <h3>Networked Journalism</h3>
+      <ul>
+        <li><a href="#">Climate Change Media Partnership</a></li>
+        <li><a href="#">COP15</a></li>
+        <li><a href="#">COP16</a></li>
+        <li><a href="#">COP17</a></li>
+        <li><a href="#">COP18</a></li>
+        <li><a href="#">IPCC AR5</a></li>
+        <li><a href="#">EJN Grants</a></li>
+        <li><a href="#">Claves21</a></li>
+        <li><a href="#">RJDH-CAR</a></li>
+        <li><a href="#">Third Pole</a></li>
+        <li><a href="#">Philippine Network of Environmental Journalists</a></li>
+        <li><a href="#">Tunisian Environmental Reporters Network</a></li>
+      </ul>
+    </div>
+
+    <div class="group">            
+      <h3>GeoJournalism</h3>
+      <ul>
+        <li><a href="#">InfoAmazonia</a></li>
+        <li><a href="#">Climate Commons</a></li>
+        <li><a href="#">Ekuatorial
+      </ul>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

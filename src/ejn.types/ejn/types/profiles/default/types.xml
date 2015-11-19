@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- This file registers new types with portal_types. The types are
+     then configured with the corresponding files in types/*.xml. Note
+     that spaces are allowed in type names, but the corresponding XML file
+     uses an underscore instead. The "Factory-based Type Information with
+     dynamic views" refers to an FTI from Products.CMFDynamicViewFTI,
+     which supports Plone's "display" menu.
+  -->
+<object name="portal_types" meta_type="Plone Types Tool">
+  <!-- -*- extra stuff goes here -*- -->
+  <object name="Reporter Resource"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Program Update"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Homepage"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Theme"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Region"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Member Profile"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Program"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Story"
+    meta_type="Factory-based Type Information with dynamic views" />
+</object>

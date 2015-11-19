@@ -1,0 +1,58 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="ejn.types">
+
+  <!-- configure your content components here -->
+  
+  <!-- -*- extra stuff goes here -*- -->
+  <class class=".reporterresource.ReporterResource">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IReporterResource"
+        />
+  </class>
+  <class class=".programupdate.ProgramUpdate">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IProgramUpdate"
+        />
+  </class>
+  <class class=".homepage.Homepage">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IHomepage"
+        />
+  </class>
+  <class class=".theme.Theme">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITheme"
+        />
+  </class>
+  <class class=".region.Region">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IRegion"
+        />
+  </class>
+  <class class=".memberprofile.MemberProfile">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IMemberProfile"
+        />
+  </class>
+  <class class=".program.Program">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IProgram"
+        />
+  </class>
+  <class class=".story.Story">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IStory"
+        />
+  </class>
+
+</configure>
