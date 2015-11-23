@@ -41,10 +41,10 @@ setup(name='ejn.types',
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        'Framework :: Plone',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        ],
+          'Framework :: Plone',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: GNU General Public License (GPL)',
+      ],
       keywords='',
       author='',
       author_email='',
@@ -54,9 +54,11 @@ setup(name='ejn.types',
       namespace_packages=['ejn', ],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['setuptools',
-                        # -*- Extra requirements: -*-
-                        ],
+      install_requires=[
+          'setuptools',
+          'Products.Archetypes>=1.7.14',
+          'Products.CMFPlone'
+      ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),
       test_suite='ejn.types.tests.test_docs.test_suite',

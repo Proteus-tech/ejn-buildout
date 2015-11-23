@@ -4,14 +4,15 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="ejn.types">
-    
+
   <five:registerPackage package="." initialize=".initialize" />
+  <includeDependencies package="." />
 
   <!-- Include the sub-packages that use their own configure.zcml files. -->
   <include package=".browser" />
   <include package=".content" />
   <include package=".portlets" />
-  
+
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"
@@ -20,7 +21,7 @@
       description="EJN Content-Types"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  
+
   <!-- -*- extra stuff goes here -*- -->
 
 </configure>
