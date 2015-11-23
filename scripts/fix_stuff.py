@@ -29,6 +29,11 @@ except:
 import transaction
 from plone import api
 from zope.component.hooks import getSite
+from zope.component import getUtility
+from zope.lifecycleevent import ObjectCreatedEvent
+from zope.intid.interfaces import IIntIds
+from five.intid.site import add_intids
+from five.intid.intid import addIntIdSubscriber
 
 
 def Command(app):
@@ -69,6 +74,20 @@ def Command(app):
             logger.warning("We have deleted some users:\n%s" % (
                 '\n'.join('%s: %s' % (d[0], ', '.join(d[1])) for d in deleted)
             ))
+        # Adding intid to every content
+        logger.info("Now adding intids")
+        add_intids(portal)
+        catalog = portal.portal_catalog
+        intids = getUtility(IIntIds)
+        results = catalog.searchResults(
+            object_provides=(
+                'Products.CMFCore.interfaces._content.IContentish',
+            )
+        )
+        for brain in results:
+            obj = brain.getObject()
+            addIntIdSubscriber(obj, ObjectCreatedEvent(obj))
+            intids.getId(obj)
 
 
 if "app" in locals():
