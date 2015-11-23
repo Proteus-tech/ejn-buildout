@@ -1,0 +1,10 @@
+.DS_Store
+*.mo
+.pyc
+*.pyc
+.egg-info
+PKG-INFO
+collective.easyslider.egg-info/*
+
+
+*.gz

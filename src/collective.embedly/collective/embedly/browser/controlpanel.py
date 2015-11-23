@@ -7,7 +7,7 @@ from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 from plone.registry.interfaces import IRegistry
-from .monkey import ControlPanelForm
+from .backport.form import ControlPanelForm
 
 from collective.embedly import embedlyMessageFactory as _
 from collective.embedly.interfaces import IEmbedlySettings

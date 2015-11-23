@@ -4,8 +4,8 @@ from zope.interface import implements
 from zope.interface import Interface
 from zope.formlib.form import FormFields
 from zope.component import adapts
-from plone.app.controlpanel.form import ControlPanelForm
-from plone.app.controlpanel.widgets import MultiCheckBoxVocabularyWidget
+from .backport.form import ControlPanelForm
+from .backport.widgets import MultiCheckBoxVocabularyWidget
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone.interfaces import IPloneSiteRoot

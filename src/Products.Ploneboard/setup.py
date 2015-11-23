@@ -40,6 +40,7 @@ setup(
         'Products.CMFPlacefulWorkflow',
         'python-dateutil<2.0dev',
         'AccessControl>=3.0',
+        'plone.fieldsets'
     ],
     extras_require=dict(
         test=['plone.app.testing',
