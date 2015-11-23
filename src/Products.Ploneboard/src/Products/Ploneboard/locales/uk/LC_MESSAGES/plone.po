@@ -1,0 +1,304 @@
+# Eugene Korenevsky <weiqist@gmail.com>, 2006.
+# Eugene V. Korenevsky <weiqist@gmail.com>, 2008.
+# Alexander Vesnenok <info@ploner.ru>, 2009.
+# Michael Krishtopa <theo@heddex.biz>, 2011
+# Roman Kozlovskyi <krzroman@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: ploneboard-plone-uk\n"
+"POT-Creation-Date: 2015-07-13 14:37+0000\n"
+"PO-Revision-Date: 2011-10-22 17:55+0300\n"
+"Last-Translator: Michael Krishtopa <theo@heddex.biz>\n"
+"Language-Team: Ukrainian <plone-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: uk\n"
+"Language-Name: Ukrainian\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: plone\n"
+
+msgid "Activate"
+msgstr "Активувати"
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+msgid "Active"
+msgstr "Активний"
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Automatic publishing in unmoderated boards"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Automatic publishing request"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Being created"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Comment Workflow [Ploneboard]"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+msgid "Conversation Workflow [Ploneboard]"
+msgstr ""
+
+#: ../skins/ploneboard_templates/comment_view.pt:118
+msgid "Edit"
+msgstr "Редагувати"
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Forum Workflow [Ploneboard]"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Free for all"
+msgstr "Відкрито для всіх"
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Hidden"
+msgstr "Прихований"
+
+msgid "Hide"
+msgstr "Приховати"
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Hide message board"
+msgstr ""
+
+msgid "Lock"
+msgstr "Заблокувати"
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Lock message board"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Locked"
+msgstr "Заблокований"
+
+msgid "Make free-for-all"
+msgstr "Зробити відкритим для всіх"
+
+msgid "Make member-posting"
+msgstr "Тільки для зареєстрованих користувачів."
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Make moderated"
+msgstr "Ввімкнути модерацію"
+
+msgid "Make private"
+msgstr "Зробити приватним"
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Make the forum free for all"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Making an Hide message board means that it will not be visible to anyone but the owner and the site administrator."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Making an Lock message board means that it will not be editable to anyone, just the owner and the site administrator."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Making an Open message board means that it will receive discussions."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Making an Unlock message board means that it will be editable."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Member requests publishing"
+msgstr ""
+
+msgid "Moderate"
+msgstr "Модерація"
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Moderated forum"
+msgstr "Форум модерується"
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Only let members post"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Open"
+msgstr "Відкрити(й)"
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Open message board"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+msgid "Pending state"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Ploneboard Workflow [Ploneboard]"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Private closed board"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Private to members only"
+msgstr "Тільки для зареєстрованих користувачів"
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Public"
+msgstr "Публічний"
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Re-publish a retracted comment"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Rejected"
+msgstr "Забраковано"
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "Require membership to post"
+msgstr "Необхідно зареєструватися щоб додавати повідомлення"
+
+#: ../skins/ploneboard_templates/add_comment_form.cpt:140
+msgid "Required"
+msgstr "обов'язковий"
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Retract a published comment"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Retracted"
+msgstr "Повернуто на доопрацювання"
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+msgid "Reviewer locks conversation"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Reviewer publishes content"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+msgid "Reviewer rejects pending conversation"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Reviewer rejects submission"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+msgid "Reviewer returns conversation to active"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_conversation_workflow/definition.xml
+msgid "This allows owner to add a Conversation and enable it to receive Comments."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "This allows owner to edit a Comment made into a Forum to be public."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_forum_workflow/definition.xml
+msgid "This allows owner to sending a Forum to be public, to receive discussion from users."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "This allows owner to sending a Ploneboard to be public, to receive discussion from users."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "This message board is locked by his Owner / the Plone site manager."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "This message board is private by discussions from Plone users."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "This message board is published to receive discussions from Plone users."
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_workflow/definition.xml
+msgid "Unlock message board"
+msgstr ""
+
+#: ../profiles/default/workflows/ploneboard_comment_workflow/definition.xml
+#: ../profiles/default/workflows/ploneboard_editable_comment_workflow/definition.xml
+msgid "Waiting for moderator"
+msgstr "Черга на модерацію"
+
+#. Default: "${number} items matching your search terms"
+#: ../browser/search.pt:39
+msgid "batch_x_items_matching_your_criteria"
+msgstr "${number} елементів відповідають вашим критеріям пошуку"
+
+#. Default: "Global forum listing"
+msgid "board_view_global"
+msgstr "Глобальний перелік форумів"
+
+#. Flat conversion view
+msgid "conversation_browserview"
+msgstr ""
+
+#. Flat conversion view
+msgid "conversation_view"
+msgstr "Плоский вигляд"
+
+#. Default: "A portlet which shows an overview of all recently updated conversations"
+#: ../profiles/default/portlets.xml
+msgid "description_recent_conversations"
+msgstr ""
+
+#. Default: "Search results"
+#: ../browser/search.pt:32
+msgid "heading_search_results"
+msgstr "Результати пошуку"
+
+#. Default: "Relevance: ${percentage}%"
+#: ../browser/search.pt:99
+msgid "label_relevance_percentage"
+msgstr "Відповідність: ${percentage}%"
+
+#. Default: "Search"
+#: ../browser/search.pt:27
+msgid "label_search"
+msgstr "Пошук"
+
+msgid "old_date_format: ${year} ${month} ${day} ${hours}:${minutes}"
+msgstr "${day}.${month}.${year} ${hours}:${minutes}"
+
+#. Default: "Ploneboard view"
+msgid "ploneboard_view"
+msgstr ""
+
+#. Threaded conversion view
+msgid "threaded_conversation_view"
+msgstr "Вид по гілках"
+
+#: ./skins/ploneboard_scripts/toPloneboardTime.py:33
+msgid "young_date_format: ${wday} ${hours}:${minutes}"
+msgstr "${wday} ${hours}:${minutes}"
+

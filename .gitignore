@@ -1,3 +1,6 @@
+*.py[co]
+*.egg-info
+**/.eggs
 .cache/
 .dbus/
 .installed.cfg
@@ -10,3 +13,4 @@ libreoffice/
 parts/
 uuid.txt
 var/
+develop-eggs/
