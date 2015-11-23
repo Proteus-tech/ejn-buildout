@@ -63,7 +63,7 @@ def Command(app):
                 userids[userid] = userids[userid] + 1
                 needs_deletion_reason.append('duplicate userid')
             if len(needs_deletion_reason) > 0:
-                api.user.delete(user)
+                api.user.delete(user=user)
                 deleted.append([raw_userid, needs_deletion_reason])
         if len(deleted) > 1:
             logger.warning("We have deleted some users:\n%s" % (
