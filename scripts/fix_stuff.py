@@ -48,23 +48,31 @@ def Command(app):
             "Site is not set. "
             "Please call this script with -O param. "
             "E.g. {}".format(USAGE))
+    userids = {}
     emails = {}
+    deleted = []
     for user in api.user.get_users():
         email = user.getProperty('email').lower()
-        emails.setdefault(email, []).append(user.getUserId())
-        if len(emails[email]) > 1:
-            name, domain = email.split('@', 1)
-            new_email = '{name}{counter}@{domain}'.format(
-                name=name,
-                counter=len(emails[email]),
-                domain=domain
-            )
-            logger.warning('Found duplicate for %s (%s): using %s' % (
-                user,
-                email,
-                new_email
-            ))
-            user.setMemberProperties(mapping={'email': new_email})
+        raw_userid = user.getUserId()
+        userid = user.getUserId().lower()
+        needs_deletion_reason = []
+        if emails.get(email, 0) == 0:
+            emails[email] = 1
+        else:
+            emails[email] = emails[email] + 1
+            needs_deletion_reason.append('duplicate email')
+        if userids.get(userid, 0) == 0:
+            userids[userid] = 1
+        else:
+            userids[userid] = userids[userid] + 1
+            needs_deletion_reason.append('duplicate userid')
+        if len(needs_deletion_reason) > 0:
+            api.user.delete(user)
+            deleted.append([raw_userid, needs_deletion_reason])
+    if len(deleted) > 1:
+        logger.warning("We have deleted some users:\n%s" % (
+            '\n'.join('%s: %s' % (d[0], ', '.join(d[1])) for d in deleted)
+        ))
 
 
 if "app" in locals():
