@@ -37,42 +37,38 @@ def Command(app):
 
     Le pipelines sono definite in eprice.migrations
     """
-    from AccessControl.SecurityManagement import newSecurityManager
-
-    # Use Zope application server user database (not plone site)
-    admin = app.acl_users.getUserById(params.admin_user)
-    newSecurityManager(None, admin)
-    portal = getSite()
-    if not portal:
-        raise ValueError(
-            "Site is not set. "
-            "Please call this script with -O param. "
-            "E.g. {}".format(USAGE))
-    userids = {}
-    emails = {}
-    deleted = []
-    for user in api.user.get_users():
-        email = user.getProperty('email').lower()
-        raw_userid = user.getUserId()
-        userid = user.getUserId().lower()
-        needs_deletion_reason = []
-        if emails.get(email, 0) == 0:
-            emails[email] = 1
-        else:
-            emails[email] = emails[email] + 1
-            needs_deletion_reason.append('duplicate email')
-        if userids.get(userid, 0) == 0:
-            userids[userid] = 1
-        else:
-            userids[userid] = userids[userid] + 1
-            needs_deletion_reason.append('duplicate userid')
-        if len(needs_deletion_reason) > 0:
-            api.user.delete(user)
-            deleted.append([raw_userid, needs_deletion_reason])
-    if len(deleted) > 1:
-        logger.warning("We have deleted some users:\n%s" % (
-            '\n'.join('%s: %s' % (d[0], ', '.join(d[1])) for d in deleted)
-        ))
+    with api.env.adopt_user(username=params.admin_user):
+        portal = getSite()
+        if not portal:
+            raise ValueError(
+                "Site is not set. "
+                "Please call this script with -O param. "
+                "E.g. {}".format(USAGE))
+        userids = {}
+        emails = {}
+        deleted = []
+        for user in api.user.get_users():
+            email = user.getProperty('email').lower()
+            raw_userid = user.getUserId()
+            userid = user.getUserId().lower()
+            needs_deletion_reason = []
+            if emails.get(email, 0) == 0:
+                emails[email] = 1
+            else:
+                emails[email] = emails[email] + 1
+                needs_deletion_reason.append('duplicate email')
+            if userids.get(userid, 0) == 0:
+                userids[userid] = 1
+            else:
+                userids[userid] = userids[userid] + 1
+                needs_deletion_reason.append('duplicate userid')
+            if len(needs_deletion_reason) > 0:
+                api.user.delete(user)
+                deleted.append([raw_userid, needs_deletion_reason])
+        if len(deleted) > 1:
+            logger.warning("We have deleted some users:\n%s" % (
+                '\n'.join('%s: %s' % (d[0], ', '.join(d[1])) for d in deleted)
+            ))
 
 
 if "app" in locals():
