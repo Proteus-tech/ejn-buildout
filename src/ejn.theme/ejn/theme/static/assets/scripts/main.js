@@ -1,0 +1,1 @@
+console.log("'Allo 'Allo!"),$("#show-mobile-nav").click(function(){$(".nav-mobile-hidden").toggle(200)});var masonryContainer=document.querySelector(".masonry-layout"),masnry;imagesLoaded(masonryContainer,function(){masnry=new Masonry(masonryContainer,{itemSelector:".masonry-item"})});

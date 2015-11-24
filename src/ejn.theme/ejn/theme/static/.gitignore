@@ -1,0 +1,13 @@
+
+*.tmproj
+codekit-config.json
+
+node_modules
+.tmp
+.sass-cache
+
+app/assets/bower_components
+dist/assets/bower_components
+test/bower_components
+
+

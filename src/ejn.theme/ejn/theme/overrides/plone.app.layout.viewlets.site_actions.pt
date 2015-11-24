@@ -1,0 +1,24 @@
+<p id="portal-siteactions"
+    tal:define="accesskeys python: {'sitemap' : '3', 'accessibility' : '0', 'contact' : '9'};"
+    tal:condition="view/site_actions"
+    i18n:domain="plone">
+
+    <tal:block repeat="saction view/site_actions">
+        <tal:item tal:define="is_last repeat/saction/end;">
+          <a
+           href=""
+           tal:define="title saction/title;
+                       id saction/id;
+                       accesskey python: accesskeys.get(id, '');"
+           i18n:attributes="title"
+           i18n:translate=""
+           tal:content="title"
+           tal:attributes="href saction/url;
+                           target saction/link_target|nothing;
+                           title title;
+                           accesskey accesskey;"
+           >Site action</a>
+          <span class="divider" tal:condition="not: is_last">&nbsp;/&nbsp;</span>
+        </tal:item>
+       </tal:block>
+</p>

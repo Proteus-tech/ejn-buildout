@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://namespaces.plone.org/diazo"
+       xmlns:css="http://namespaces.plone.org/diazo/css"
+       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+       xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <notheme css:if-not-content="#visual-portal-wrapper"/>
+
+    <rules css:if-content="#visual-portal-wrapper">
+
+        <theme href="diazo_template.html" />
+
+        <xi:include href="rules/head.xml" />
+
+        <xi:include href="rules/contents.xml" />
+
+        <xi:include href="rules/footer.xml" />
+
+  </rules>
+
+</rules>

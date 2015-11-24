@@ -2,13 +2,29 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="ejn.theme">
 
   <five:registerPackage package="." initialize=".initialize" />
 
-  <include file="skins.zcml" />
-  <include file="profiles.zcml" />
-
+  <genericsetup:registerProfile
+      name="default"
+      title="ejn.theme"
+      directory="profiles/default"
+      description="Installs the ejn.theme package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
   <!-- -*- extra stuff goes here -*- -->
-  
+
+  <browser:jbot
+    directory="overrides"
+    layer=".interfaces.IBrowserLayer" />
+
+  <plone:static
+      directory="static"
+      type="theme"
+  />
+
 </configure>
