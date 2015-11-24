@@ -8,7 +8,7 @@ setup(
     version=version,
     description="The new theme for the Earth Journalism Network website",
     long_description=open(
-        "README.txt").read() + "\n" + open(
+        "README.md").read() + "\n" + open(
         os.path.join("docs", "HISTORY.txt")).read(),
     # Get more strings from
     # http://pypi.python.org/pypi?:action=list_classifiers
