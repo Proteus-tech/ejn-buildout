@@ -36,6 +36,12 @@ from five.intid.site import add_intids
 from five.intid.intid import addIntIdSubscriber
 
 
+DELETE_CONTENT = (
+    ('/Plone/opportunities/expired-opportunities/2014-ejn-grants-applications/'
+     'ejn-grants-blank-budget-form'),
+)
+
+
 def Command(app):
     """Questo script migra i contenuti di un vecchio sito eprice
     con collective.transmogrifier.
@@ -88,6 +94,10 @@ def Command(app):
             obj = brain.getObject()
             addIntIdSubscriber(obj, ObjectCreatedEvent(obj))
             intids.getId(obj)
+        # Delete problematic content
+        for path in DELETE_CONTENT:
+            obj = portal.restrictedTraverse(path)
+            api.content.delete(obj=obj, check_linkintegrity=False)
 
 
 if "app" in locals():
