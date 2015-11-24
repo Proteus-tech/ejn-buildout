@@ -6,6 +6,7 @@
 .installed.cfg
 .mozilla/
 .ssh/
+buildout.cfg
 bin/
 include/
 lib/

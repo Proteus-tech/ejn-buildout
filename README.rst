@@ -1,9 +1,17 @@
-Plone Intranet Venus
-====================
+EJN buildout
+============
 
-This repository contains helper scripts and configuration to install `Plone Intranet`_.
+Bootstrap::
 
-Installation instructions: see the `quickstart install documentation`_.
+  $ cp buildout.cfg.sample buildout.cfg
+  $ pip install -r requirements.txt
+  $ buildout
 
-.. _Plone Intranet: http://ploneintranet.com
-.. _quickstart install documentation: http://docs.ploneintranet.org/installation/quickstart.html
+For production::
+
+  $ cp buildout.cfg.sample buildout.cfg
+  $ sed -i -e 's/development/production/' buildout.cfg
+  $ pip install -r requirements.txt
+  $ buildout
+
+Then make a supervisord init file and launch it.
