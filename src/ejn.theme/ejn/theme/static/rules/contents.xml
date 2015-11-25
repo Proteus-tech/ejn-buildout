@@ -13,15 +13,16 @@
 
     <copy css:content-children="#portal-column-content" css:theme="#content article" />
 
-    <replace content="//h1/@class">
+    <xsl:template match="//h1[class]">
       <xsl:attribute name="class">
-        <xsl:value-of select="."/> page-hed</xsl:attribute>
-    </replace>
+        <xsl:value-of select="."/> page-hed
+      </xsl:attribute>
+    </xsl:template>
 
-    <replace content="//*[contains(@class,'documentDescription')]/@class">
+    <xsl:template match="//*[contains(@class,'documentDescription')]">
       <xsl:attribute name="class">
         <xsl:value-of select="."/> intro</xsl:attribute>
-    </replace>
+    </xsl:template>
 
     <copy css:theme="div.sidebar .sidebar__bd" css:content-children="#portal-column-one" />
     <append css:theme="div.sidebar .sidebar__bd" css:content-children="#portal-column-two" />
@@ -30,7 +31,6 @@
         <prepend css:theme="div.container.layout-2col">
             <xsl:attribute name="class">container</xsl:attribute>
         </prepend>
-
     </rules>
 
 </rules>

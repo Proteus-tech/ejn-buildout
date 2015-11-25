@@ -1,0 +1,15 @@
+* Bring in correct custom
+* Install products:
+
+  - eea.tags
+  - Ploneboard
+  - collective.embedly
+  - Products.ATContentTypes
+  - Reference browser widget
+  - Slider item
+  - collective.easyslider
+  - PloneFormGen
+  - Plone Keyword Manager
+
+* Go into "Resources > plone-legacy" and remove "resource-plone" from there
+
