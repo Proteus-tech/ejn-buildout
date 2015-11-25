@@ -6,6 +6,4 @@
 
     <copy css:theme="#siteactions" css:content-children="#portal-siteactions"/>
 
-    <append css:theme="body" content="/html/head/script" />
-
 </rules>

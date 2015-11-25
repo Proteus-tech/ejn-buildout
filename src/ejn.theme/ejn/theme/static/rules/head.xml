@@ -27,4 +27,5 @@
     <after css:content="head link:not([href*='ploneCustom'])" theme="/html/head/title" />
     <after content="/html/head/style" theme="/html/head/title" />
     <after css:content="head link[href*='ploneCustom']" theme-children="/html/head" />
+    <after theme-children="/html/head" content="/html/head/script" />
 </rules>
