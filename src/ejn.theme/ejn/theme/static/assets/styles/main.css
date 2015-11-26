@@ -1545,3 +1545,8 @@ img {
     }
 }
 
+body.template-contact-info textarea {
+    background: #f9fcf5;
+    border: 1px solid #DEE2D9;
+    height: 200px;
+}
