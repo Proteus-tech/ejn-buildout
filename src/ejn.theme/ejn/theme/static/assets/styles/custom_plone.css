@@ -303,3 +303,288 @@ form .formQuestion{ font-weight: bold; }
 form .formHelp { font-weight: normal; display: block; }
 
 .plone_jscalendar select{ width: auto; }
+
+/* start ploneCustom.css */
+
+
+@media only screen and (max-width: 900px){
+    .layout-2col #content, .layout-2col main#content {
+        width: 100%;
+        clear: both;
+    }
+}
+
+.layout-2col .main-content {
+    width: 75%;
+    margin: 0 0 3em;
+    float: left;
+}
+
+#viewlet-below-content{
+    clear: both;
+}
+
+/* replace from Dave Ramos */
+
+.stories-keywords {
+margin: 0;
+padding: 0;
+border: 0;
+overflow: hidden;*zoom:1
+}
+.stories-keywords li {
+list-style-image: none;
+list-style-type: none;
+display: inline-block;
+vertical-align: middle;*vertical-align:auto;*zoom:1;*display:inline;
+white-space: nowrap;
+float: left;
+margin: 0 2px 2px 0;
+padding: 2px 3px;
+width: auto;
+font-size: .65em;
+color: #777;
+background-color: #DEE2D9;
+border-radius: 2px
+}
+.stories-keywords li a {
+background: 0 0;
+border: 0;
+color: inherit
+}
+.stories-keywords li a:hover,.stories-keywords li a:hover h1,.stories-keywords li a:hover h2,.stories-keywords li a:hover h3,.stories-keywords li a:hover h4,.stories-keywords li a:hover h5,.stories-keywords li a:hover h6,.stories-keywords li a:hover p {
+color: #008fa9
+}
+
+
+.ns-type--about {
+padding: 2em 2em 1em;
+background-color: #DEE2D9
+}
+.ns-type--about h4 {
+margin: 0 0 .5em;
+font-size: 1.5em
+}
+.ns-type--about p {
+font-size: 1.25em;
+margin: 0 0 1em
+}
+.ns-type--about .action {
+clear: both;
+width: 100%;
+text-align: right
+}
+
+/* end replace from Dave Ramos */
+
+table.invisible {
+    visibility: visible;
+}
+
+#front-intro {
+background: url('/map_bg_960.png');
+}
+
+select {
+ height: auto;
+ width: auto;
+ border: 1px solid #363636;
+ padding-left: 0;
+}
+
+.sidebar nav .active {
+    border-bottom: 1px solid #008fa9;
+    color: #008fa9;
+    font-weight: 700;
+}
+
+.profile-box{
+    background-color: #efefef;
+    padding: 15px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.profile-pic{
+    width: 135px;
+    height: auto;
+    float: left;
+    margin-right: 25px;
+}
+
+.profile-head{
+    overflow: hidden;
+}
+
+.profile-box .field {
+    margin-top: 12px;
+}
+
+.profile-box .field .label{
+    font-weight: bold;
+}
+
+.profile-box .visibility{
+    text-align: center;
+}
+
+.profile-box .visibility .field{
+    display: inline-block;
+}
+
+.profile-box .visibility .field:first-child{
+    margin-right: 20px;
+}
+
+.profile-box .visibility .field input{
+    margin-right: 5px;
+}
+
+.profile-box button {
+    position: relative;
+    vertical-align: top;
+    height: 40px;
+    padding: 0;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: #2ecc71;
+    border: 0;
+    border-bottom: 2px solid #28be68;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 -2px #28be68;
+    box-shadow: inset 0 -2px #28be68;
+    padding: 0 15px;
+    float: right;
+    margin: 50px 0 20px 0;
+}
+.profile-box button:active {
+    top: 1px;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#member_profile-base-edit fieldset{
+    padding-left: 0;
+}
+
+#member_profile-base-edit input[type="text"]{
+    padding: 0 5px;
+}
+
+#member_profile-base-edit select{
+    padding: 5px;
+    border-radius: 0;
+    border: 1px solid #DEE2D9;
+    background: url('gray_arrow.png') right 10px center no-repeat;
+    background-size: 15px;
+    padding-right: 30px;
+}
+
+#member_profile-base-edit select[multiple="multiple"]{
+    background-image: none;
+}
+
+#member_profile-base-edit input[type="checkbox"]{
+    margin-right: 10px;
+}
+
+#member_profile-base-edit .existingTags{
+    width: auto;
+}
+
+#member_profile-base-edit .formHelp{
+    float: none;
+    clear: both;
+}
+
+#member_profile-base-edit #subject_keywords{
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+#member_profile-base-edit #archetypes-fieldname-interests_extra{
+    clear: both;
+}
+
+#member_profile-base-edit input.context{
+    margin-right: 15px;
+}
+
+#member_profile-base-edit .newTagsSection{
+    margin-left: 0;
+}
+
+#member_profile-base-edit .newTagsSection br{
+    display: none;
+}
+
+#member_profile-base-edit .existingTagsSection{
+    margin-left: 0;
+}
+
+#member_profile-base-edit textarea{
+    padding: 5px;
+    border-radius: 0;
+    border: 1px solid #DEE2D9;
+    background: #f9fcf5;
+    margin-top: 15px;
+}
+
+.stories-group-singles .story-item{
+    overflow: hidden;
+    margin-bottom: 2em;
+}
+
+.stories-group-singles .stories-image{
+    float: left;
+}
+
+.stories-group-singles .stories-head{
+    font-size: 2em;
+    margin: 0;
+}
+
+.stories-group-singles .stories-keywords li{
+    background-color: white;
+    border: 1px solid #efefef;
+    font-size: .7em;
+    padding: 8px;
+    margin: 0 4px 4px 0;
+}
+
+.stories-group-singles .read-more{
+    color: #008fa9;
+    margin: 5px 0;
+    display: block;
+}
+
+.stories-group-singles ul.stories-keywords {
+    margin: 0;
+    padding: 0;
+    clear: both;
+}
+
+.stories-group-singles .stories-byline{
+    margin: 0.5em 0;
+    font-size: 1em;
+}
+
+/* end ploneCustom.css */
+
+@media (min-width: 769px) {
+    .plone-toolbar-left #edit-zone nav > ul ul {
+        background: rgba(20, 20, 20, 0.9);
+    }
+}
+
+body.template-contact-info textarea {
+    background: #f9fcf5;
+    border: 1px solid #DEE2D9;
+    height: 200px;
+    width: 50%;
+}
+

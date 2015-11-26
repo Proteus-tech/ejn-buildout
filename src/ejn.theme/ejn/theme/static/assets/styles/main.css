@@ -1537,17 +1537,3 @@ img {
         page-break-after: avoid;
     }
 }
-
-
-@media (min-width: 769px) {
-    .plone-toolbar-left #edit-zone nav > ul ul {
-        background: rgba(20, 20, 20, 0.9);
-    }
-}
-
-body.template-contact-info textarea {
-    background: #f9fcf5;
-    border: 1px solid #DEE2D9;
-    height: 200px;
-    width: 50%;
-}
