@@ -10,9 +10,6 @@
          css:if-content="#edit-bar" />
   <copy css:theme="div.logo a" attributes="href title accesskey" css:content="#portal-logo" />
   <replace css:content-children="#portal-globalnav" css:theme-children="nav.global-nav ul" />
-  <before css:theme-children=".utility-nav"
-          css:content="#portal-personaltools" />
-
 
   <drop css:content="#content" attributes="id"/>
 
