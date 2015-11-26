@@ -4,6 +4,4 @@
        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
        xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <copy css:theme="#siteactions" css:content-children="#portal-siteactions"/>
-
 </rules>
