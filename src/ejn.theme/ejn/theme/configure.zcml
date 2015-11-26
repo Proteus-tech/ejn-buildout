@@ -27,4 +27,6 @@
       type="theme"
   />
 
+  <include package=".browser" />
+
 </configure>
