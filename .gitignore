@@ -16,3 +16,4 @@ uuid.txt
 var/
 develop-eggs/
 .emacs.desktop*
+data/

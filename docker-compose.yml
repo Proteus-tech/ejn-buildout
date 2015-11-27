@@ -1,0 +1,22 @@
+ejn:
+  build: .
+  ports:
+    - "8080:8080"
+  volumes:
+    - "./scripts:/srv/webapp/scripts"
+    - "./src:/srv/webapp/src"
+    - "./entrypoint.sh:/srv/webapp/entrypoint.sh"
+    - "./var/filestorage:/srv/webapp/data/filestorage"
+    - "./var/blobstorage:/srv/webapp/data/blobstorage"
+  volumes_from:
+    - ejndata
+
+# See:
+# http://container42.com/2014/11/18/data-only-container-madness/
+ejndata:
+  image: abstracttechnology/plone:5.0
+  entrypoint: "/bin/echo"
+  command: "Plone data container"
+  # volumes:
+  #   - "./var/filestorage:/srv/webapp/var/filestorage"
+  #   - "./var/blobstorage:/srv/webapp/var/blobstorage"
