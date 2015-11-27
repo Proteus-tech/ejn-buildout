@@ -36,11 +36,10 @@ from five.intid.site import add_intids
 from five.intid.intid import addIntIdSubscriber
 
 
-# DELETE_CONTENT = (
-#     ('/Plone/opportunities/expired-opportunities/2014-ejn-grants-applications/'
-#      'ejn-grants-blank-budget-form'),
-# )
-DELETE_CONTENT = []
+DELETE_CONTENT = (
+    ('/Plone/opportunities/applications/2013/2014-ejn-grants-applications/'
+     'ejn-grants-blank-budget-form'),
+)
 
 
 def Command(app):
