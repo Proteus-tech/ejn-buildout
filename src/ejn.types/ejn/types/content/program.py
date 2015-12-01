@@ -44,15 +44,6 @@ ProgramSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
     atapi.ReferenceField(
-        'people',
-        widget=atapi.MultiSelectionWidget(label='People'),
-        allowed_types=('Member Profile'),
-        relationship='program person',
-        multiValued=True,
-        vocabulary_display_path_bound=-1,
-    ),
-
-    atapi.ReferenceField(
         'parentProgram',
         widget=atapi.MultiSelectionWidget(label='Parent Program'),
         allowed_types=('Program'),
@@ -91,6 +82,10 @@ schemata.finalizeATCTSchema(ProgramSchema, moveDiscussion=False)
 
 ProgramSchema.changeSchemataForField('location', 'default')
 ProgramSchema.moveField('location', after='text')
+ProgramSchema.changeSchemataForField('creators', 'default')
+ProgramSchema.moveField('creators', after='program')
+ProgramSchema['creators'].widget.label = 'Project Team'
+ProgramSchema['creators'].widget.description = ''
 
 
 class Program(base.ATCTContent):
