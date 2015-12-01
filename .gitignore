@@ -4,6 +4,7 @@
 .cache/
 .dbus/
 .installed.cfg
+.mr.developer.cfg
 .mozilla/
 .ssh/
 buildout.cfg
@@ -17,3 +18,4 @@ var/
 develop-eggs/
 .emacs.desktop*
 data/
+etc/
