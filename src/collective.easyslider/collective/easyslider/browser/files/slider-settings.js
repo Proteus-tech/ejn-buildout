@@ -58,7 +58,7 @@ function setup_events(){
     //begin $ namespace
     function move_action(){
         //event for all move actions(up, down, delete)
-        
+
         if($(this).hasClass('remove')){
             if(!window.confirm("Are you sure you want to remove this slide?")){
                 return false;
@@ -78,35 +78,39 @@ function setup_events(){
     })(jQuery);
 }
 function enableSlides(){
-    jq("#slidelist").sortable({
+    //needs to be recalled whenever slides are retrieved
+    (function($){
+    $("#slidelist").sortable({
         items: 'li.sortslide',
         placeholder: 'sortable-placeholder',
         forcePlaceholderSize: true,
         update: function(event, ui){
             var order = [];
-            var slides = jq('li.sortslide');
+            var slides = $('li.sortslide');
             for(var i=0; i<slides.length; i++){
-                order.push(slides.eq(i).attr('data-index'));   
+                order.push(slides.eq(i).attr('data-index'));
             }
-            jq.ajax({
+            $.ajax({
                 url: jq('base').attr('href') + '/@@order-slides',
                 type: 'POST',
                 data: {
                     order: order
                 },
                 success: function(data){
-                    jq.ajax({
+                    $.ajax({
                         url: window.location.toString(),
                         success: function(data){
                             var dom = $(data);
-                            jq('#slidelist').replaceWith(dom.find('#slidelist'));
+                            $('#slidelist').replaceWith(dom.find('#slidelist'));
                             enableSlides();
                         }
                     });
                 }
-            }); 
+            });
         }
     });
+    //end $ namespace
+    })(jQuery);
 }
 
 (function($){
