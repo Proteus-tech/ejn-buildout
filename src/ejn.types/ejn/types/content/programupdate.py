@@ -6,23 +6,25 @@ from zope.interface import implements
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
+from Products.ATContentTypes.configuration import zconf
 
 from ejn.types.vocabs import site_themes
 from ejn.types.vocabs import site_regions
-
-# -*- Message Factory Imported Here -*-
-
+from ejn.types import typesMessageFactory as _
 from ejn.types.interfaces import IProgramUpdate
 from ejn.types.config import PROJECTNAME
 
 ProgramUpdateSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
-
-
-  atapi.TextField('text',
-            searchable=1,
-            default_output_type = 'text/x-html-safe',
-            widget=atapi.RichWidget(label="Story Text"),
-            ),
+    atapi.TextField(
+        'text',
+        searchable=1,
+        default_output_type='text/x-html-safe',
+        widget=atapi.TinyMCEWidget(
+            label=_(u'label_program_narrative', default=u"Program Narrative"),
+            rows=8,
+            allow_file_upload=zconf.ATDocument.allow_document_upload,
+        ),
+    ),
 
     atapi.ImageField('image',
               sizes= {'large'  : (768, 768),
@@ -119,11 +121,12 @@ ProgramUpdateSchema['description'].storage = atapi.AnnotationStorage()
 
 schemata.finalizeATCTSchema(ProgramUpdateSchema, moveDiscussion=False)
 
-ProgramUpdateSchema.changeSchemataForField('location', 'default') 
+ProgramUpdateSchema.changeSchemataForField('location', 'default')
 ProgramUpdateSchema.moveField('location', after='publisher')
 
-ProgramUpdateSchema.changeSchemataForField('subject', 'default') 
+ProgramUpdateSchema.changeSchemataForField('subject', 'default')
 ProgramUpdateSchema.moveField('subject', after='themes')
+
 
 class ProgramUpdate(base.ATCTContent):
     """Program Update"""
@@ -135,6 +138,5 @@ class ProgramUpdate(base.ATCTContent):
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
 
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
 
 atapi.registerType(ProgramUpdate, PROJECTNAME)

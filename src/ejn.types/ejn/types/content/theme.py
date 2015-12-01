@@ -6,45 +6,49 @@ from zope.interface import implements
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
+from Products.ATContentTypes.configuration import zconf
 
+from ejn.types import typesMessageFactory as _
 from ejn.types.vocabs import site_themes
-
-# -*- Message Factory Imported Here -*-
-
 from ejn.types.interfaces import ITheme
 from ejn.types.config import PROJECTNAME
 
 ThemeSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
-atapi.TextField('text',
-          searchable=1,
-          default_output_type = 'text/x-html-safe',
-          widget=atapi.RichWidget(label="Intro Text"),
-          ),
+    atapi.TextField(
+        'text',
+        searchable=1,
+        default_output_type='text/x-html-safe',
+        widget=atapi.TinyMCEWidget(
+            label=_(u'label_intro_text', default=u"Intro Text"),
+            rows=8,
+            allow_file_upload=zconf.ATDocument.allow_document_upload,
+        ),
+    ),
 
-atapi.ImageField('image',
-          sizes= {'large'  : (768, 768),
-                 'preview' : (400, 400),
-                 'twoeightfive' : (285, 285),
-                 'mini'    : (200, 200),
-                 'thumb'   : (128, 128),
-                 'tiny'    :  (84, 84),
-                 'tile'    :  (64, 64),
-                },
-           widget = atapi.ImageWidget(
-                    label= "Image",
-                    description = "",
-                    show_content_type = False,)
-           ),
+    atapi.ImageField('image',
+              sizes= {'large'  : (768, 768),
+                     'preview' : (400, 400),
+                     'twoeightfive' : (285, 285),
+                     'mini'    : (200, 200),
+                     'thumb'   : (128, 128),
+                     'tiny'    :  (84, 84),
+                     'tile'    :  (64, 64),
+                    },
+               widget = atapi.ImageWidget(
+                        label= "Image",
+                        description = "",
+                        show_content_type = False,)
+               ),
 
-atapi.LinesField('theme',
-         vocabulary=site_themes,
-         index='FieldIndex',
-         multiValued=False,
-         widget=atapi.SelectionWidget(label="Theme",
-                              description="",
-                              ),
-         ),
+    atapi.LinesField('theme',
+             vocabulary=site_themes,
+             index='FieldIndex',
+             multiValued=False,
+             widget=atapi.SelectionWidget(label="Theme",
+                                  description="",
+                                  ),
+             ),
 
 ))
 
@@ -67,6 +71,5 @@ class Theme(base.ATCTContent):
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
 
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
 
 atapi.registerType(Theme, PROJECTNAME)

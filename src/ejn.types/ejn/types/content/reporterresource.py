@@ -6,23 +6,26 @@ from zope.interface import implements
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
+from Products.ATContentTypes.configuration import zconf
 
+from ejn.types import typesMessageFactory as _
 from ejn.types.vocabs import site_themes
 from ejn.types.vocabs import site_regions
-
-# -*- Message Factory Imported Here -*-
-
 from ejn.types.interfaces import IReporterResource
 from ejn.types.config import PROJECTNAME
 
 ReporterResourceSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
-
-  atapi.TextField('text',
-            searchable=1,
-            default_output_type = 'text/x-html-safe',
-            widget=atapi.RichWidget(label="Story Text"),
-            ),
+    atapi.TextField(
+        'text',
+        searchable=1,
+        default_output_type='text/x-html-safe',
+        widget=atapi.TinyMCEWidget(
+            label=_(u'label_story_text', default=u"Story Text"),
+            rows=8,
+            allow_file_upload=zconf.ATDocument.allow_document_upload,
+        ),
+    ),
 
     atapi.ImageField('image',
               sizes= {'large'  : (768, 768),

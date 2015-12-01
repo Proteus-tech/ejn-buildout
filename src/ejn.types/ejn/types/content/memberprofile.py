@@ -8,6 +8,7 @@ from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes.configuration import zconf
 
+from ejn.types import typesMessageFactory as _
 from ejn.types.vocabs import occupations
 from ejn.types.vocabs import media_types
 from ejn.types.vocabs import site_themes
@@ -128,10 +129,16 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             schemata='categorization',
             ),
 
-  atapi.TextField('profile',
-            searchable=1,
-            widget=atapi.RichWidget(label="Biography/Profile"),
-            ),
+  atapi.TextField(
+      'profile',
+      searchable=1,
+      default_output_type='text/x-html-safe',
+      widget=atapi.TinyMCEWidget(
+          label=_(u'label_biography_profile', default=u"Biography/Profile"),
+          rows=8,
+          allow_file_upload=zconf.ATDocument.allow_document_upload,
+      ),
+  ),
 
   atapi.ImageField('image',
              languageIndependent=True,
