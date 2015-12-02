@@ -16,5 +16,12 @@
       allowed_interface="Products.CMFPlone.browser.interfaces.ISitemapView"
       />
 
+  <browser:page
+    name="resolveuid"
+    for="*"
+    class=".resolveuid.ResolveUIDView"
+    permission="zope.Public"
+    layer="..interfaces.IBrowserLayer"
+  />
 
 </configure>
