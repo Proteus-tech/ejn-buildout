@@ -19,3 +19,4 @@ develop-eggs/
 .emacs.desktop*
 data/
 etc/
+eggs/
