@@ -87,6 +87,18 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
                                         ),
             ),
 
+  atapi.StringField('city',
+             searchable=1,
+             widget=atapi.StringWidget(label="City"),
+             schemata='professional info',
+             ),
+
+  atapi.StringField('country',
+             searchable=1,
+             widget=atapi.StringWidget(label="Country"),
+             schemata='professional info',
+             ),
+
   atapi.StringField('occupation',
             widget=atapi.SelectionWidget(label="Occupation"),
             schemata='professional info',
