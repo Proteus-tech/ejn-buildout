@@ -29,117 +29,6 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
                                       description="Surname or Family Name",),
             ),
 
-  atapi.StringField('phone',
-            searchable=1,
-            widget=atapi.StringWidget(label="Phone Number"),
-            ),
-
-  atapi.StringField('phoneTwo',
-            searchable=1,
-            widget=atapi.StringWidget(label="Secondary Phone Number"),
-            ),
-
-  atapi.StringField('fax'),
-
-  atapi.StringField('email'),
-
-  atapi.TextField('personalURL',
-             widget=atapi.StringWidget(label="Personal URL")
-             ), 
-
-  atapi.TextField('mediaHouse',
-             widget=atapi.StringWidget(label="Media House")
-             ), 
-
-  atapi.TextField('mediaHouseURL',
-             widget=atapi.StringWidget(label="Media House website")
-             ), 
-
-  atapi.StringField('address',
-             widget=atapi.StringWidget(label="Media House Address"),
-             ),
-             
-  atapi.StringField('addressTwo',
-             widget=atapi.StringWidget(label="Media House Address Line 2"),
-             ),
-             
-  atapi.StringField('city',
-             searchable=1,
-             widget=atapi.StringWidget(label="Media House City"),
-             ),
-             
-  atapi.StringField('stateProv',
-             searchable=1,
-             widget=atapi.StringWidget(label="Media House State/Provence"),
-             ),
-             
-  atapi.StringField('postalCode',
-             searchable=1,
-             widget=atapi.StringWidget(label="Media House Zip/Postal Code"),
-             ),
-             
-  atapi.StringField('country',
-             searchable=1,
-             widget=atapi.StringWidget(label="Media House Country"),
-             ),
-
-  atapi.StringField('skypeUser',
-            searchable=1,
-            widget=atapi.StringWidget(label="Skype username"),
-            ),
-
-  atapi.StringField('twitterUser',
-            searchable=1,
-            widget=atapi.StringWidget(label="Twitter username"),
-            ),
-
-  atapi.DateTimeField('dateOfBirth',
-            searchable=1,
-            widget=atapi.CalendarWidget(label="Date of Birth",
-                                        show_hm = False,
-                                        ),
-            ),
-
-  atapi.StringField('gender',
-            widget=atapi.StringWidget(label="Gender"),
-            ),
-
-  atapi.StringField('citizenship',
-            widget=atapi.StringWidget(label="Country of Citizenship"),
-            ),
-
-  atapi.StringField('countriesOfResidence',
-            widget=atapi.StringWidget(label="Country of Residence"),
-            ),
-
-  atapi.StringField('languagesSpoken',
-            widget=atapi.StringWidget(label="Languages"),
-            ),
-
-  atapi.BooleanField('passport',
-              widget=atapi.BooleanWidget(label="Holds a passport valid?"),
-              ),
-
-  atapi.StringField('timezoneName',
-            widget=atapi.StringWidget(label="Timezone"),
-            ),
-
-  atapi.StringField('timezoneNum',
-            widget=atapi.StringWidget(label="Timezone integer"),
-            schemata='categorization',
-            ),
-
-  atapi.TextField(
-      'profile',
-      searchable=1,
-      default_output_type='text/x-html-safe',
-      widget=atapi.TinyMCEWidget(
-          label=_(u'label_biography_profile', default=u"Biography/Profile"),
-          rows=8,
-          allow_file_upload=zconf.ATDocument.allow_document_upload,
-      ),
-  ),
-
   atapi.ImageField('image',
              languageIndependent=True,
              swallowResizeExceptions = zconf.swallowImageResizeExceptions.enable,
@@ -162,6 +51,17 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
                       show_content_type = False,)
   ),
 
+  atapi.TextField(
+      'profile',
+      searchable=1,
+      default_output_type='text/x-html-safe',
+      widget=atapi.TinyMCEWidget(
+          label=_(u'label_biography_profile', default=u"Biography/Profile"),
+          rows=8,
+          allow_file_upload=zconf.ATDocument.allow_document_upload,
+      ),
+  ),
+
   atapi.LinesField('interests',
            vocabulary=site_themes,
            index='KeywordIndex',
@@ -176,6 +76,17 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             widget=atapi.StringWidget(label="Additional Areas of Environmental Journalism Interest"),
             ),
 
+  atapi.StringField('gender',
+            widget=atapi.StringWidget(label="Gender"),
+            ),
+
+  atapi.DateTimeField('dateOfBirth',
+            searchable=1,
+            widget=atapi.CalendarWidget(label="Date of Birth",
+                                        show_hm = False,
+                                        ),
+            ),
+
   atapi.StringField('occupation',
             widget=atapi.SelectionWidget(label="Occupation"),
             schemata='professional info',
@@ -186,6 +97,11 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             widget=atapi.StringWidget(label="Organization name"),
             schemata='professional info',
             ),
+
+  atapi.TextField('orgURL',
+             widget=atapi.StringWidget(label="Organization website"),
+             schemata='professional info',
+             ), 
 
   atapi.LinesField('mediaTypes',
             widget=atapi.MultiSelectionWidget(label="Media type"),
@@ -199,77 +115,81 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             schemata='professional info',
             ),
 
-  atapi.TextField('orgURL',
-             widget=atapi.StringWidget(label="Organization website"),
-             schemata='organization',
-             ), 
+  atapi.StringField('citizenship',
+            widget=atapi.StringWidget(label="Country of Citizenship"),
+            schemata='professional info',
+            ),
 
-  atapi.StringField('phoneOrg',
+  atapi.StringField('countriesOfResidence',
+            widget=atapi.StringWidget(label="Country of Residence"),
+            schemata='professional info',
+            ),
+
+  atapi.StringField('languagesSpoken',
+            widget=atapi.StringWidget(label="Languages"),
+            schemata='professional info',
+            ),
+
+  atapi.BooleanField('passport',
+              widget=atapi.BooleanWidget(label="Holds a passport valid?"),
+              schemata='professional info',
+              ),
+
+
+
+
+
+  atapi.StringField('phone',
             searchable=1,
             widget=atapi.StringWidget(label="Phone Number"),
-            schemata='organization',
+            schemata='contact',
             ),
 
-  atapi.StringField('addressOrg',
-             widget=atapi.StringWidget(label="Address"),
-             schemata='organization',
-             ),
-             
-  atapi.StringField('addressTwoOrg',
-             widget=atapi.StringWidget(label="Address Line 2"),
-             schemata='organization',
-             ),
-             
-  atapi.StringField('cityOrg',
-             searchable=1,
-             widget=atapi.StringWidget(label="City"),
-             schemata='organization',
-             ),
-             
-  atapi.StringField('stateProvOrg',
-             searchable=1,
-             widget=atapi.StringWidget(label="State/Provence"),
-             schemata='organization',
-             ),
-             
-  atapi.StringField('postalCodeOrg',
-             searchable=1,
-             widget=atapi.StringWidget(label="Zip/Postal Code"),
-             schemata='organization',
-             ),
-             
-  atapi.StringField('countryOrg',
-             searchable=1,
-             widget=atapi.StringWidget(label="Country"),
-             schemata='organization',
-             ),
-
-  atapi.StringField('periodicity',
-            widget=atapi.StringWidget(label="Periodicity"),
-            schemata='organization',
-            ),
-
-  atapi.StringField('circulation',
-            widget=atapi.StringWidget(label="Circulation/audience size"),
-            schemata='organization',
-            ),
-
-  atapi.StringField('nameSupervisor',
+  atapi.StringField('phoneTwo',
             searchable=1,
-            widget=atapi.StringWidget(label="Supervisor's Name"),
-            schemata='organization',
+            widget=atapi.StringWidget(label="Secondary Phone Number"),
+            schemata='contact',
             ),
 
-  atapi.StringField('phoneSupervisor',
-            searchable=1,
-            widget=atapi.StringWidget(label="Supervisor's Phone Number"),
-            schemata='organization',
+  atapi.StringField('fax',
+            schemata='contact',
             ),
 
-  atapi.StringField('emailSupervisor',
+  atapi.StringField('email',
+            schemata='contact',
+            ),
+
+  atapi.TextField('personalURL',
+             widget=atapi.StringWidget(label="Personal URL"),
+             schemata='contact',
+             ), 
+             
+  atapi.StringField('country',
+             searchable=1,
+             widget=atapi.StringWidget(label="Media House Country"),
+             schemata='contact',
+             ),
+
+  atapi.StringField('skypeUser',
             searchable=1,
-            widget=atapi.StringWidget(label="Supervisor's email"),
-            schemata='organization',
+            widget=atapi.StringWidget(label="Skype username"),
+            schemata='contact',
+            ),
+
+  atapi.StringField('twitterUser',
+            searchable=1,
+            widget=atapi.StringWidget(label="Twitter username"),
+            schemata='contact',
+            ),
+
+  atapi.StringField('timezoneName',
+            widget=atapi.StringWidget(label="Timezone"),
+            schemata='contact',
+            ),
+
+  atapi.StringField('timezoneNum',
+            widget=atapi.StringWidget(label="Timezone integer"),
+            schemata='contact',
             ),
 
    atapi.StringField('sourceUID',
