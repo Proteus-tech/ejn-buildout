@@ -23,5 +23,7 @@
       />
 
   <!-- -*- extra stuff goes here -*- -->
+  <adapter factory=".factories.ATCTFileFactory"
+            for="Products.CMFCore.interfaces._content.IFolderish" />
 
 </configure>

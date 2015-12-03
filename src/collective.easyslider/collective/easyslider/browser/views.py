@@ -38,6 +38,7 @@ class SliderView(BrowserView, AbstractSliderView):
 
     def get_items(self):
         context = aq_inner(self.context)
+        res = ""
         if IATFolder.providedBy(context) or \
                 IATBTreeFolder.providedBy(context):
             res = self.context.getFolderContents(
