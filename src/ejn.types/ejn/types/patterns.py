@@ -20,5 +20,7 @@ class EJNSettingsAdapter(PloneSettingsAdapter):
         else:
             tiny_options = json.loads(options['data-pat-tinymce'])
             tiny_options['upload']['initialFolder'] = IUUID(folder)
+            tiny_options['upload']['currentPath'] = '/' + \
+                self.DEFAULT_UPLOAD_FOLDER
             options['data-pat-tinymce'] = json.dumps(tiny_options)
         return options
