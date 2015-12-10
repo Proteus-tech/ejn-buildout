@@ -12,12 +12,13 @@ class EJNSettingsAdapter(PloneSettingsAdapter):
         purl = getToolByName(self.context, 'portal_url')
         options = super(EJNSettingsAdapter, self).tinymce()
         portal = purl.getPortalObject()
+
         try:
             folder = portal.restrictedTraverse(self.DEFAULT_UPLOAD_FOLDER)
-        except IndexError:
+        except KeyError:
             pass
         else:
             tiny_options = json.loads(options['data-pat-tinymce'])
             tiny_options['upload']['initialFolder'] = IUUID(folder)
-            options['data-pat-tinymce'] = json.dumps(options)
+            options['data-pat-tinymce'] = json.dumps(tiny_options)
         return options
