@@ -24,6 +24,11 @@
 
   <!-- -*- extra stuff goes here -*- -->
   <adapter factory=".factories.ATCTFileFactory"
-            for="Products.CMFCore.interfaces._content.IFolderish" />
+           for="Products.CMFCore.interfaces._content.IFolderish" />
+
+  <adapter for="* ejn.theme.interfaces.IBrowserLayer *"
+           factory=".patterns.EJNSettingsAdapter"
+           provides="Products.CMFPlone.interfaces.IPatternsSettings"
+           name="plone_settings" />
 
 </configure>
