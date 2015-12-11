@@ -28,6 +28,7 @@ class MigrateView(BrowserView):
         if not self.request.form.get('src_type', '') and not self.request.form.get('dst_type', ''):
             return self.doReturn(_("migration_error_validation",
                                    default=u"You need to fill both required fields."), 'error')
+
         migration = self.doMigration()
         if migration:
             return self.doReturn(_("migration_done_msg",
@@ -40,11 +41,22 @@ class MigrateView(BrowserView):
         """
         handle migration from a portal_type to anther, and log all outputs given
         """
+        portal_path = '/'.join(self.context.getPhysicalPath())
+
         src_type = self.request.form.get('src_type', '')
         dst_type = self.request.form.get('dst_type', '')
+        folder_path = self.request.form.get('folder_path', portal_path)
+
+        if folder_path and (not folder_path.startswith(portal_path)):
+            folder_path = (folder_path[0] == '/') \
+                and portal_path + folder_path  \
+                or portal_path + '/' + folder_path
+
         logger.info("*********** Migration start ***********")
         output = migrateContents(
-            self.context, src_type, dst_type, query={}
+            self.context, src_type, dst_type, query={
+                'path' : folder_path
+            }
         )
         pu = getToolByName(self.context, "plone_utils")
         pu.addPortalMessage(_("Migration from ${src_type} to ${dst_type}: found ${results} items.",
