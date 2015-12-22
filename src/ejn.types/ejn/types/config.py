@@ -13,4 +13,5 @@ ADD_PERMISSIONS = {
     'MemberProfile': 'ejn.types: Add Member Profile',
     'Program': 'ejn.types: Add Program',
     'Story': 'ejn.types: Add Story',
+    'Opportunity': 'ejn.types: Add Opportunity',
 }

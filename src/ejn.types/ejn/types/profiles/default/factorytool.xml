@@ -18,5 +18,6 @@
     <type portal_type="Member Profile" />
     <type portal_type="Program" />
     <type portal_type="Story" />
+    <type portal_type="Opportunity" />
   </factorytypes>
 </object>

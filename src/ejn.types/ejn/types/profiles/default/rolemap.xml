@@ -34,5 +34,9 @@
       <role name="Manager" />
       <role name="Contributor" />
     </permission>
+    <permission name="ejn.types: Add Opportunity" acquire="False">
+      <role name="Manager" />
+      <role name="Contributor" />
+    </permission>
   </permissions>
 </rolemap>
