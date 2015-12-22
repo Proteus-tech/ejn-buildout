@@ -17,4 +17,5 @@ def setupVarious(context):
     registry = getUtility(IRegistry)
     nav_settings = registry.forInterface(INavigationSchema, prefix="plone")
     plone_utils = api.portal.get_tool('plone_utils')
-    nav_settings.displayed_types = tuple(plone_utils.getUserFriendlyTypes())
+    # XXX: disabled
+    # nav_settings.displayed_types = tuple(plone_utils.getUserFriendlyTypes())

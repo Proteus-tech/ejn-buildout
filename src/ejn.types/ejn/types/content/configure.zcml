@@ -4,7 +4,7 @@
     i18n_domain="ejn.types">
 
   <!-- configure your content components here -->
-  
+
   <!-- -*- extra stuff goes here -*- -->
   <class class=".reporterresource.ReporterResource">
     <require
@@ -52,6 +52,13 @@
     <require
         permission="zope2.View"
         interface="..interfaces.IStory"
+        />
+  </class>
+
+  <class class=".opportunity.Opportunity">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IOpportunity"
         />
   </class>
 
