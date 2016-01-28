@@ -873,7 +873,7 @@ label {
     margin-bottom: .5em;
 }
 .nc a, .nc a:visited {
-    background: 0 0;
+    background-color: #dee2d9;
     color: inherit;
     display: block;
     margin: 0;
