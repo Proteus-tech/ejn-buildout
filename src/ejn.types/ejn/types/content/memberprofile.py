@@ -72,10 +72,6 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
                                 ),
            ),
 
-  atapi.StringField('interests_extra',
-            widget=atapi.StringWidget(label="Additional Areas of Environmental Journalism Interest"),
-            ),
-
   atapi.StringField('gender',
             widget=atapi.StringWidget(label="Gender"),
             ),
@@ -146,10 +142,6 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
               widget=atapi.BooleanWidget(label="Holds a passport valid?"),
               schemata='professional info',
               ),
-
-
-
-
 
   atapi.StringField('phone',
             searchable=1,
