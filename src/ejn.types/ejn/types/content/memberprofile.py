@@ -186,8 +186,26 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             schemata='contact',
             ),
 
-  atapi.StringField('timezoneName',
-            widget=atapi.StringWidget(label="Timezone"),
+  atapi.StringField('twitterUser',
+            searchable=1,
+            widget=atapi.StringWidget(label="Twitter username"),
+            schemata='contact',
+            ),
+
+  atapi.StringField('comNetworkOther',
+            widget=atapi.StringWidget(
+                               label="Other Communication Network",
+                               description="e.g. WeChat, Telegram, etc.  Use the next for your username"),
+            schemata='contact',
+            ),
+
+  atapi.StringField('comNetworkOtherID',
+            widget=atapi.StringWidget(label="Other Communication Network User ID"),
+            schemata='contact',
+            ),
+
+  atapi.StringField('preferredCommunication',
+            widget=atapi.StringWidget(label="Preferred Contact Method"),
             schemata='contact',
             ),
 
