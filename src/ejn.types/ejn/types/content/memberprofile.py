@@ -209,6 +209,11 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             schemata='contact',
             ),
 
+  atapi.StringField('timezoneName',
+            widget=atapi.StringWidget(label="Timezone"),
+            schemata='contact',
+            ),
+
   atapi.StringField('timezoneNum',
             widget=atapi.StringWidget(label="Timezone integer"),
             schemata='contact',
