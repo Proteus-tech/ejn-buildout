@@ -13,6 +13,7 @@ from ejn.types.vocabs import occupations
 from ejn.types.vocabs import media_types
 from ejn.types.vocabs import site_themes
 from ejn.types.vocabs import sharing_roles
+from ejn.types.vocabs import site_regions
 
 from ejn.types.interfaces import IMemberProfile
 from ejn.types.config import PROJECTNAME
@@ -68,6 +69,16 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
            index='KeywordIndex',
            multiValued=True,
            widget=atapi.MultiSelectionWidget(label="Area of Environmental Journalism Interest",
+                                format='checkbox',
+                                description="",
+                                ),
+           ),
+
+  atapi.LinesField('regions_of_interests',
+           vocabulary=site_regions,
+           index='KeywordIndex',
+           multiValued=True,
+           widget=atapi.MultiSelectionWidget(label="Regions of Interest",
                                 format='checkbox',
                                 description="",
                                 ),
