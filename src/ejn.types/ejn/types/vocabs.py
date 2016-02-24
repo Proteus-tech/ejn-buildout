@@ -28,10 +28,10 @@ ejn_programs = (
 )
 
 sharing_roles = (
-    'EJN staff only',
-    'Verified members',
-    'All site members',
-    'public',
+    'EJN staff',
+    'Verified journalists',
+    'Unverified EJN members',
+    'Public',
 )
 
 occupations = (
