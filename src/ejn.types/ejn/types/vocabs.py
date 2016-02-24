@@ -27,6 +27,13 @@ ejn_programs = (
     'GeoJournalism',
 )
 
+sharing_roles = (
+    'EJN staff only',
+    'Verified members',
+    'All site members',
+    'public',
+)
+
 occupations = (
     'Journalist',
     'Academic',

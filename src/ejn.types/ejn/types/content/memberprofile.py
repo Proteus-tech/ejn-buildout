@@ -12,6 +12,7 @@ from ejn.types import typesMessageFactory as _
 from ejn.types.vocabs import occupations
 from ejn.types.vocabs import media_types
 from ejn.types.vocabs import site_themes
+from ejn.types.vocabs import sharing_roles
 
 from ejn.types.interfaces import IMemberProfile
 from ejn.types.config import PROJECTNAME
@@ -218,6 +219,33 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             widget=atapi.StringWidget(label="Timezone integer"),
             schemata='contact',
             ),
+
+  atapi.StringField(
+      'bioSharing',
+      vocabulary=sharing_roles,
+      widget=atapi.SelectionWidget(
+          label="Biography Section Sharing",
+          description="",
+          ),
+      ),
+
+  atapi.StringField(
+      'proSharing',
+      vocabulary=sharing_roles,
+      widget=atapi.SelectionWidget(
+          label="Professional Section Sharing",
+          description="",
+          ),
+      ),
+
+  atapi.StringField(
+      'contactSharing',
+      vocabulary=sharing_roles,
+      widget=atapi.SelectionWidget(
+          label="Contact Section Sharing",
+          description="",
+          ),
+      ),
 
    atapi.StringField('sourceUID',
              schemata='categorization',
