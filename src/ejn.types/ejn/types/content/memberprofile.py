@@ -223,6 +223,7 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
   atapi.StringField(
       'bioSharing',
       vocabulary=sharing_roles,
+      default='EJN staff',
       widget=atapi.SelectionWidget(
           label="Biography Section Sharing",
           description="",
@@ -232,6 +233,7 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
   atapi.StringField(
       'proSharing',
       vocabulary=sharing_roles,
+      default='EJN staff',
       widget=atapi.SelectionWidget(
           label="Professional Section Sharing",
           description="",
@@ -241,6 +243,7 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
   atapi.StringField(
       'contactSharing',
       vocabulary=sharing_roles,
+      default='EJN staff',
       widget=atapi.SelectionWidget(
           label="Contact Section Sharing",
           description="",
