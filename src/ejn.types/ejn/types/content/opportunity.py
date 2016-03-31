@@ -32,6 +32,15 @@ OpportunitySchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         ),
     ),
 
+    atapi.ReferenceField('program',
+              widget=atapi.SelectionWidget(label='Under Program'),
+              allowed_types=('Program'),
+              relationship='opportunity program',
+              multiValued=0,
+              vocabulary_display_path_bound=-1,
+              ),
+
+
 
 ))
 
