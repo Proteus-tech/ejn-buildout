@@ -11,6 +11,8 @@ class SocialTagsViewlet(BaseViewlet):
                 (t for t in self.tags if t.get('property') == 'og:image'), None)
             ogimagetype = next(
                 (t for t in self.tags if t.get('property') == 'og:image:type'), None)
+            twitterimage = next(
+                (t for t in self.tags if t.get('property') == 'twitter:image'), None)
             image = next(
                 (t for t in self.tags if t.get('itemprop') == 'image'), None)
 
@@ -27,3 +29,5 @@ class SocialTagsViewlet(BaseViewlet):
                 ogimagetype['content'] = mimetype
             if image:
                 image['content'] = image_url
+            if twitterimage:
+                twitterimage['content'] = image_url
