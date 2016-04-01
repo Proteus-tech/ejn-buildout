@@ -20,7 +20,7 @@ class SocialTagsViewlet(BaseViewlet):
             elif t.get('name') == 'twitter:card':
                 t['content'] = 'summary_large_image'
 
-    def opengraph_metatags(self):
+    def facebook_metatags(self):
         mimetype = get_contenttype(self.context.image)
         for t in self.tags:
             if t.get('property') == 'og:image':
@@ -28,7 +28,7 @@ class SocialTagsViewlet(BaseViewlet):
             elif t.get('property') == 'og:image:type':
                 t['content'] = mimetype
 
-    def generic_metatags(self):
+    def googleplus_metatags(self):
         for t in self.tags:
             if t.get('itemprop') == 'image':
                 t['content'] = self.image_url
@@ -37,5 +37,5 @@ class SocialTagsViewlet(BaseViewlet):
         super(SocialTagsViewlet, self).update()
         if hasattr(self.context, self._image_field_name):
             self.twitter_metatags()
-            self.opengraph_metatags()
-            self.generic_metatags()
+            self.facebook_metatags()
+            self.googleplus_metatags()
