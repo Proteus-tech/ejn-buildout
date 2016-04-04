@@ -30,6 +30,7 @@ setup(
         'z3c.jbot',
         'plone.app.theming',
         # -*- Extra requirements: -*-
+        'pycountry'
     ],
     entry_points="""
     # -*- Entry points: -*-
