@@ -3,9 +3,9 @@ import os
 
 version = '1.0'
 
-long_description = '\n'.join(
+long_description = '\n'.join([
     open("README.txt").read(),
-    open(os.path.join("docs", "HISTORY.txt")).read()
+    open(os.path.join("docs", "HISTORY.txt")).read()]
 )
 
 setup(
