@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<layers>
+  <layer name="ejn.policy" interface="ejn.policy.interfaces.IBrowserLayer" />
+</layers>
