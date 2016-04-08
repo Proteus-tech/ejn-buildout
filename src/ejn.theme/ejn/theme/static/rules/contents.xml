@@ -35,5 +35,10 @@
     <!--   <xsl:attribute name="class">container</xsl:attribute> -->
     <!-- </replace> -->
   </rules>
+  <replace css:content-children="#portal-anontools ul" css:theme-children="#portal-personaltools" />
+  <copy css:content="#portal-advanced-search a" attributes="href" css:theme="#portal-search a" />
+  <replace css:theme-children="#portal-search a">
+    <xsl:value-of select="//input[@class='searchButton']/@value"/>
+  </replace>
 
 </rules>
