@@ -300,6 +300,6 @@ class MemberProfile(base.ATCTContent):
     description = atapi.ATFieldProperty('description')
 
     def Title(self, **kwargs):
-        return self.getNameLast() + ", " + self.getNameFirst()
+        return "%s %s" %(self.getNameFirst(), self.getNameLast())
 
 atapi.registerType(MemberProfile, PROJECTNAME)
