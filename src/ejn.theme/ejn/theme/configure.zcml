@@ -29,4 +29,9 @@
 
   <include package=".browser" />
 
+  <utility
+    component=".vocabs.CountriesVocabularyFactory"
+    name="ejn.theme.Countries"
+    />
+
 </configure>

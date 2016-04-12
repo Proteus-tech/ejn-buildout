@@ -10,6 +10,7 @@
     <!--  Header -->
     <drop css:theme="script#js-remove" />
     <drop css:theme="meta[http-equiv='Content-type']" />
+    <drop css:theme="meta[name='description']" />
     <drop css:content="meta[name='viewport']" />
     <drop css:content="link[href*='reset']" />
     <drop css:content="link[href$='forms.css']" />

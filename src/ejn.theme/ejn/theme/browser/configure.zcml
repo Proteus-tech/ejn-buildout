@@ -24,4 +24,14 @@
     layer="..interfaces.IBrowserLayer"
   />
 
+
+  <!-- Render the social media metadata -->
+  <browser:viewlet
+      name="plone.htmlhead.socialtags"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+      class=".social.SocialTagsViewlet"
+      permission="zope2.View"
+      layer="..interfaces.IBrowserLayer"
+      />
+
 </configure>
