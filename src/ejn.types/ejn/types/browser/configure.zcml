@@ -8,7 +8,7 @@
   <!-- -*- extra stuff goes here -*- -->
 
 <browser:page
-          for="ejn.types.interfaces.IProgram"
+          for="ejn.types.interfaces.IMemberProfile"
           name="get_member_programs"
           permission="zope2.Public"
           class=".get_member_programs.GetMemberProgramsView"
