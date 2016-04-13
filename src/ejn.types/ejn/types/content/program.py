@@ -13,6 +13,8 @@ from ejn.types import typesMessageFactory as _
 from ejn.types.interfaces import IProgram
 from ejn.types.config import PROJECTNAME
 
+from plone.app.vocabularies.catalog import CatalogSource
+
 ProgramSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     atapi.TextField(
@@ -86,6 +88,10 @@ ProgramSchema.changeSchemataForField('creators', 'default')
 ProgramSchema.moveField('creators', after='program')
 ProgramSchema['creators'].widget.label = 'Project Team'
 ProgramSchema['creators'].widget.description = ''
+ProgramSchema.changeSchemataForField('relatedItems', 'default')
+ProgramSchema.moveField('relatedItems', after='creators')
+ProgramSchema['relatedItems'].widget.label = 'Project Team'
+ProgramSchema['relatedItems'].widget.description = ''
 
 
 class Program(base.ATCTContent):
