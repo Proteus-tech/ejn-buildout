@@ -7,4 +7,11 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+<browser:page
+          for="ejn.types.interfaces.IProgram"
+          name="get_member_programs"
+          permission="zope2.Public"
+          class=".get_member_programs.GetMemberProgramsView"
+          />
+
 </configure>
