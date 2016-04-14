@@ -30,8 +30,8 @@ def add_member_profile(data, customfields=None):
     mdata['nameFirst'] = ' '.join(fullname_parts[:-1])
     mdata['nameLast'] = ' '.join(fullname_parts[-1:])
     mdata['email'] = member.getProperty('email')
-    mdata['country'] = member.getProperty('contry')
-    mdata['countriesOfResidence'] = member.getProperty('contry')
+    mdata['country'] = member.getProperty('country')
+    mdata['countriesOfResidence'] = member.getProperty('country')
     mdata['gender'] = member.getProperty('gender')
     for f in customfields:
         if f in BASE_FIELDS or f in ['country', 'gender']:
