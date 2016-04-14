@@ -3,21 +3,20 @@ from Products.Archetypes.config import REFERENCE_CATALOG
 
 from Products.Five.browser import BrowserView
 from Acquisition import aq_inner
-from zope.component import getUtility
-from zope.intid.interfaces import IIntIds
 from zope.security import checkPermission
-from zc.relation.interfaces import ICatalog
 
 
 class GetMemberProgramsView(BrowserView):
 
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
     def __call__(self):
-        catalog = getUtility(ICatalog)
-        intids = getUtility(IIntIds)
 
         reference_catalog = getToolByName(self, REFERENCE_CATALOG)
 
-        relations = reference_catalog.getBackReferences(self,
+        relations = reference_catalog.getBackReferences(self.context,
                                                         relationship="relatesTo")
 
         projects = []
