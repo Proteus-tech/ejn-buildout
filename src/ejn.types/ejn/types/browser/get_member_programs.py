@@ -1,3 +1,6 @@
+from Products.CMFCore.utils import getToolByName
+from Products.Archetypes.config import REFERENCE_CATALOG
+
 from Products.Five.browser import BrowserView
 from Acquisition import aq_inner
 from zope.component import getUtility
@@ -12,14 +15,15 @@ class GetMemberProgramsView(BrowserView):
         catalog = getUtility(ICatalog)
         intids = getUtility(IIntIds)
 
+        reference_catalog = getToolByName(self, REFERENCE_CATALOG)
+
+        relations = reference_catalog.getBackReferences(self,
+                                                        relationship="relatesTo")
+
         projects = []
-        relations = catalog.findRelations(
-            dict(
-                to_id=intids.getId(aq_inner(self.context)),
-                from_attribute='relatedItems')
-        )
+
         for rel in relations:
-                obj = intids.queryObject(rel.from_id)
+                obj = rel.getSourceObject()
                 if obj is not None and checkPermission('zope2.View', obj):
                     projects.append(obj)
         return projects
