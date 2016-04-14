@@ -44,6 +44,18 @@ HomepageSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             vocabulary_display_path_bound=-1,
             ),
 
+  atapi.StringField('memberJournalists',
+            widget=atapi.StringWidget(label="Member Journalists"),
+            ),
+
+  atapi.StringField('trainedJournalists',
+            widget=atapi.StringWidget(label="Journalists Trained"),
+            ),
+
+  atapi.StringField('storiesPublished',
+            widget=atapi.StringWidget(label="Stories Published"),
+            ),
+
 ))
 
 # Set storage on fields copied from ATContentTypeSchema, making sure
