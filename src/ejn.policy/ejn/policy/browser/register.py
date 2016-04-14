@@ -37,12 +37,15 @@ def add_member_profile(data, customfields=None):
         if f in BASE_FIELDS or f in ['country', 'gender']:
             continue
         mdata[f] = member.getProperty(f)
-    content.create(
+    mp = content.create(
         container=mps_dir,
         type='Member Profile',
         id=userid,
         safe_id=True,
         **mdata)
+    mp.changeOwnership(member, recursive=True)
+    mp.reindexObjectSecurity()
+    return mp
 
 
 class AddUserForm(BaseAddUserForm):
