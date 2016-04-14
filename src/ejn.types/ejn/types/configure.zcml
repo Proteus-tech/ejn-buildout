@@ -31,4 +31,11 @@
            provides="Products.CMFPlone.interfaces.IPatternsSettings"
            name="plone_settings" />
 
+  <!-- <subscriber for="ejn.types.interfaces.IMemberProfile
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".profile_actions.modify_access"
+              />
+              -->
+
+
 </configure>
