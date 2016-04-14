@@ -47,7 +47,7 @@ ProgramSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     atapi.ReferenceField(
         'parentProgram',
-        widget=atapi.MultiSelectionWidget(label='Parent Program'),
+        widget=atapi.MultiSelectionWidget(label='Related activities'),
         allowed_types=('Program'),
         relationship='parent program',
         multiValued=True,
