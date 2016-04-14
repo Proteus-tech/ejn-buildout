@@ -19,7 +19,7 @@ def modify_access(obj, event):
 
     if bioSharing == 'Public':
         if state != 'published':
-            wftool.doActionFor(obj, "published")
+            wftool.doActionFor(obj, "publish")
 
     elif bioSharing == 'Unverified EJN members':
         if state != 'visible':
