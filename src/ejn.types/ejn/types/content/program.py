@@ -4,6 +4,7 @@
 from zope.interface import implements
 
 from Products.Archetypes import atapi
+from Products.Archetypes.Widget import RelatedItemsWidget
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes.configuration import zconf
@@ -47,7 +48,7 @@ ProgramSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     atapi.ReferenceField(
         'parentProgram',
-        widget=atapi.MultiSelectionWidget(label='Related activities'),
+        widget=atapi.RelatedItemsWidget(label='Related activities'),
         allowed_types=('Program'),
         relationship='parent program',
         multiValued=True,
