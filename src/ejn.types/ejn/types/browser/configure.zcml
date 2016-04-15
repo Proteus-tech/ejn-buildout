@@ -18,7 +18,7 @@
           for="ejn.types.interfaces.IProgram"
           name="get_related_projects"
           permission="zope2.Public"
-          class=".get_member_programs.GetRelatedProjectsView"
+          class=".get_related_projects.GetRelatedProjectsView"
           />
 
 </configure>
