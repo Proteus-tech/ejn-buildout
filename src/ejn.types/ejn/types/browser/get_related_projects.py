@@ -14,15 +14,11 @@ class GetRelatedProjectsView(BrowserView):
 
     def __call__(self):
 
-        reference_catalog = getToolByName(self, REFERENCE_CATALOG)
-
-        relations = reference_catalog.getBackReferences(self.context,
-                                                        relationship="parent program")
+        relations = context.getParentProgram()
 
         projects = []
 
-        for rel in relations:
-                obj = rel.getSourceObject()
-                if obj is not None and checkPermission('zope2.View', obj):
-                    projects.append(obj)
+        for obj in relations:
+            if obj is not None and checkPermission('zope2.View', obj):
+                projects.append(obj)
         return projects
