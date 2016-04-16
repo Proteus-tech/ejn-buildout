@@ -14,7 +14,7 @@ class GetRelatedProjectsView(BrowserView):
 
     def __call__(self):
 
-        relations = context.getParentProgram()
+        relations = self.context.getParentProgram()
 
         projects = []
 
