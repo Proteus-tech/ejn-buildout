@@ -43,7 +43,9 @@ def add_member_profile(data, customfields=None):
         id=userid,
         safe_id=True,
         **mdata)
-    mp.changeOwnership(member, recursive=True)
+    site = portal.get()
+    site.plone_utils.changeOwnershipOf(mp, userid)
+    # mp.changeOwnership(member, recursive=True)
     mp.reindexObjectSecurity()
     return mp
 
