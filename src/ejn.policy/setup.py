@@ -28,7 +28,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'plone.app.users'
+        'plone.app.users',
+        'collective.registrationform'
     ],
     entry_points="""
     # -*- Entry points: -*-
