@@ -27,7 +27,7 @@ class GetPermsForContext(BrowserView):
         results['groups'] = ugroups
         results['creator'] = creator
 
-        if userid == creator:
+        if userid == creator or 'Administrators' in ugroups:
           results['bioSharing'] = True
           results['proSharing'] = True
           results['contactSharing'] = True
