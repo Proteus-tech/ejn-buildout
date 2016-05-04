@@ -24,8 +24,8 @@ class GetPermsForContext(BrowserView):
 
         results = {}
 
-        results['user'] = userid
-        results['groups'] = ugroups
+        results['user'] = current
+        #results['groups'] = ugroups
         results['creator'] = creator
         
         results['staff'] = staff
