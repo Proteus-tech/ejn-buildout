@@ -10,13 +10,13 @@ class GetPermsForContext(BrowserView):
         self.request = request
 
     def __call__(self):
-        bioSharing = context.getBioSharing()
-        proSharing = context.getProSharing()
-        contactSharing = context.getContactSharing()
+        bioSharing = self.context.getBioSharing()
+        proSharing = self.context.getProSharing()
+        contactSharing = self.context.getContactSharing()
 
         current = api.user.get_current()
         userid = current
-        creator = context.Creator()
+        creator = self.context.Creator()
         
         ugroups = api.group.get_groups(username=userid)
 
