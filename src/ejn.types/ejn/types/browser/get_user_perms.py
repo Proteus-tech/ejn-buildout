@@ -28,8 +28,8 @@ class GetPermsForContext(BrowserView):
         #results['groups'] = ugroups
         results['creator'] = creator
         
-        results['staff'] = staff
-        results['journalists'] = journalists
+        results['staff'] = [i.id for i in staff]
+        results['journalists'] = [i.id for i in journalists] 
         
         return results
 
