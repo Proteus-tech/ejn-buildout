@@ -18,6 +18,8 @@ class GetPermsForContext(BrowserView):
         userid = current.getProperty('username')
         creator = self.context.Creator()
         
+        return userid
+        
         ugroups = api.group.get_groups(username=userid)
 
         results = {}
