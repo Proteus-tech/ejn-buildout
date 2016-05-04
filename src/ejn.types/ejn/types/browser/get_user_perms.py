@@ -15,7 +15,7 @@ class GetPermsForContext(BrowserView):
         contactSharing = self.context.getContactSharing()
 
         current = api.user.get_current()
-        location = current.getProperty('username')
+        userid = current.getProperty('username')
         creator = self.context.Creator()
         
         ugroups = api.group.get_groups(username=userid)
