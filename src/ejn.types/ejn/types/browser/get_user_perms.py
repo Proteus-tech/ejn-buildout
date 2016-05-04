@@ -17,21 +17,14 @@ class GetPermsForContext(BrowserView):
         current = api.user.get_current()
         creator = self.context.Creator()
         
-        staff = api.user.get_users(groupname='ejn-staff')
-        journalists = api.user.get_users(groupname='verified-journalists')
-        
         ugroups = api.group.get_groups(username=current.id)
+        groups = [i.id for i in ugroups]
 
         results = {}
 
         results['user'] = current.id
-        results['groups'] = [i.id for i in ugroups]
+        results['groups'] = groups
         results['creator'] = creator
-        
-        results['staff'] = [i.id for i in staff]
-        results['journalists'] = [i.id for i in journalists] 
-        
-        return results
 
         if userid == creator:
           results['bioSharing'] = True
