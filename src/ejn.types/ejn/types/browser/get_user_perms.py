@@ -20,12 +20,12 @@ class GetPermsForContext(BrowserView):
         staff = api.user.get_users(groupname='ejn-staff')
         journalists = api.user.get_users(groupname='verified-journalists')
         
-        # ugroups = api.group.get_groups(username=current)
+        ugroups = api.group.get_groups(username=current.id)
 
         results = {}
 
         results['user'] = current
-        #results['groups'] = ugroups
+        results['groups'] = ugroups
         results['creator'] = creator
         
         results['staff'] = [i.id for i in staff]
