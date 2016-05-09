@@ -25,6 +25,7 @@ ejn_programs = (
     'Education',
     'Networked Journalism',
     'GeoJournalism',
+    'Story Campaigns',
 )
 
 sharing_roles = (
