@@ -124,7 +124,8 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
              ), 
 
   atapi.LinesField('mediaTypes',
-            widget=atapi.MultiSelectionWidget(label="Media type"),
+            widget=atapi.MultiSelectionWidget(label="Media type",
+                                              format="checkbox"),
             vocabulary=media_types,
             multiValued=True,
             schemata='professional info',
