@@ -19,6 +19,6 @@ class GetRelatedProjectUIDsView(BrowserView):
         uids = []
 
         for obj in relations:
-            uids.append(obj.UID)
+            uids.append(obj.UID())
 
         return uids
