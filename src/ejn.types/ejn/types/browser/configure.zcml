@@ -42,5 +42,11 @@
           class=".get_related_project_uids.GetRelatedProjectUIDsView"
           />
 
+<browser:page
+          for="ejn.types.interfaces.IProgram"
+          name="get_project_team_uids"
+          permission="zope2.Public"
+          class=".get_project_team_uids.GetProjectTeamUIDsView"
+          />
 
 </configure>
