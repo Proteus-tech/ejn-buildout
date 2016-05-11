@@ -22,5 +22,5 @@ class GetMemberProgramUIDsView(BrowserView):
         projects = []
 
         for rel in relations:
-            projects.append(rel.targetUID())
+            projects.append(rel.targetUID)
         return projects
