@@ -29,7 +29,7 @@ setup(
     install_requires=[
         'setuptools',
         'plone.app.users',
-        'collective.registrationform'
+        'collective.registrationcaptcha'
     ],
     entry_points="""
     # -*- Entry points: -*-
