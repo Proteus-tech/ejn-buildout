@@ -16,7 +16,7 @@ class GetProjectTeamUIDsView(BrowserView):
 
       reference_catalog = getToolByName(self, REFERENCE_CATALOG)
 
-      relations = reference_catalog.getBackReferences(self.context,
+      relations = reference_catalog.getReferences(self.context,
                                                       relationship="relatesTo")
 
       team = []
