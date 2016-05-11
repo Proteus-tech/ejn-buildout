@@ -18,6 +18,7 @@ site_regions = (
     'South Asia + Central Asia',
     'Southeast Asia + Oceania ',
     'Sub-Saharan Africa',
+    'Global',
 )
 
 
