@@ -1,0 +1,89 @@
+Server-side only field
+----------------------
+
+Get our test browser::
+    
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> from Products.PloneFormGen.tests.pfgtc import MailHostMock
+    >>> portal.MailHost = MailHostMock()
+    >>> portal_url = portal.portal_url()
+    >>> request = layer['request']
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+
+Add a new form folder and mark the subject input variable as a server side variable.
+(It needs a non-empty default value because it's set as required.) ::
+  
+    >>> from plone.app.testing import setRoles
+    >>> from plone.app.testing import login
+    >>> from plone.app.testing import TEST_USER_NAME
+    >>> from plone.app.testing import TEST_USER_PASSWORD
+    >>> from plone.app.testing import TEST_USER_ID
+    >>> setRoles(portal, TEST_USER_ID, ['Manager'])
+    >>> login(portal, TEST_USER_NAME)
+    >>> portal.invokeFactory('FormFolder', 'testform')
+    'testform'
+    >>> portal.testform.topic.setServerSide(True)
+    >>> portal.testform.topic.getServerSide()
+    True
+
+    >>> portal.testform.topic.setFgDefault('asdf')
+    >>> import transaction
+    >>> transaction.commit()
+
+Login to the portal:
+
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = TEST_USER_NAME
+    >>> browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+And confirm that the server-side field is absent from the rendered form::
+    
+    >>> browser.open(portal_url + '/testform')
+    >>> 'id="archetypes-fieldname-topic"' in  browser.contents
+    False
+
+By default when we submit the form the server-side field won't be included on the
+thank you page::
+
+    >>> portal.testform.mailer.setRecipient_email('mdummy@address.com')
+    >>> transaction.commit()
+    >>> browser.getControl('Your E-Mail Address').value = 'test@example.com'
+    >>> browser.getControl('Comments').value = 'Now with double the rockage...'
+    >>> browser.getControl('Submit').click()
+    <sent mail from ...to ['mdummy@address.com']>
+
+    >>> 'Subject' in browser.contents
+    False
+
+Test for 'Subject' in the mail body::
+
+    >>> app._p_jar.sync()
+    >>> msgtext = portal.MailHost.msgtext[portal.MailHost.msgtext.index('\n\n'):]
+    >>> body = '\n\n'.join(portal.MailHost.msgtext.split('\n\n')[1:])
+    >>> 'Subject' in body
+    False
+
+Specifically list the field as one that should be included in the thank
+you page, and then it should show up in mail and thanks page::
+
+    >>> portal.testform['thank-you'].setShowAll(False)
+    >>> portal.testform['thank-you'].setShowFields(('topic',))
+    >>> portal.testform.mailer.setShowAll(False)
+    >>> portal.testform.mailer.setShowFields(('topic',))
+    >>> transaction.commit()
+    >>> browser.goBack()
+    >>> browser.getControl('Your E-Mail Address').value = 'test@example.com'
+    >>> browser.getControl('Comments').value = 'Now with double the rockage...'
+    >>> browser.getControl('Submit').click()
+    <sent mail from ...to ['mdummy@address.com']>
+
+    >>> app._p_jar.sync()
+    >>> body = '\n\n'.join(portal.MailHost.msgtext.split('\n\n')[1:])
+    >>> 'Subject' in body
+    True
+
+    >>> 'Subject' in browser.contents
+    True

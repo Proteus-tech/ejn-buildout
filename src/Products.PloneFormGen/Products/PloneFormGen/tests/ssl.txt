@@ -1,0 +1,65 @@
+'Force SSL' setting
+-------------------
+
+First let's get our test browser and make sure that it won't re-raise Redirect errors::
+
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> from Products.PloneFormGen.tests.pfgtc import MailHostMock
+    >>> portal.MailHost = MailHostMock()
+    >>> portal_url = portal.portal_url()
+    >>> request = layer['request']
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> from ZPublisher import HTTPResponse
+    >>> HTTPResponse.status_codes['redirect'] = 200
+
+Login to the portal:
+
+    >>> from plone.app.testing import setRoles
+    >>> from plone.app.testing import login
+    >>> from plone.app.testing import TEST_USER_NAME
+    >>> from plone.app.testing import TEST_USER_PASSWORD
+    >>> from plone.app.testing import TEST_USER_ID
+    >>> setRoles(portal, TEST_USER_ID, ['Manager'])
+    >>> login(portal, TEST_USER_NAME)
+    >>> import transaction
+    >>> transaction.commit()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = TEST_USER_NAME
+    >>> browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+Set up a form with the 'force SSL' setting on::
+
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Form Folder').click()
+    >>> browser.getControl('Title').value = 'testform'
+    
+    >>> browser.getControl(name='forceSSL:boolean').value = '1'
+    
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    '.../testform/...'
+    >>> 'Bobo-Exception-Type' in browser.headers
+    False
+
+Note that we didn't get forced to SSL immediately after creating the form.  (Which
+would have raised a testbrowser error.)  That's because for people who have permission
+to edit the form, 'force SSL' only takes place *on form submission*.
+
+However, the form action should be set to an https URL so that the submission will still
+be secure::
+
+    >>> 'action="https://' in browser.contents
+    True
+
+Finally, let's use a new browser that isn't authenticated, and confirm that for someone
+who doesn't have permission to edit the form, SSL will be forced on initial form load as
+well (so the user sees a security icon in their browser.) ::
+
+    >>> browser = Browser(app)
+    >>> browser.open(portal_url + '/testform')
+    >>> browser.headers['Bobo-Exception-Type'] in ('Redirect', "<class 'zExceptions.Redirect'>")
+    True
+    

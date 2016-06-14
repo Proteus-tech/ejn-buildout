@@ -1,0 +1,96 @@
+File attachments
+================
+
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> from Products.PloneFormGen.tests.pfgtc import MailHostMock
+    >>> portal.MailHost = MailHostMock()
+    >>> portal_url = portal.portal_url()
+    >>> request = layer['request']
+    >>> import cStringIO
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+
+Login to the portal:
+
+    >>> from plone.app.testing import setRoles
+    >>> from plone.app.testing import login
+    >>> from plone.app.testing import TEST_USER_NAME
+    >>> from plone.app.testing import TEST_USER_PASSWORD
+    >>> from plone.app.testing import TEST_USER_ID
+    >>> setRoles(portal, TEST_USER_ID, ['Manager'])
+    >>> login(portal, TEST_USER_NAME)
+    >>> import transaction
+    >>> transaction.commit()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = TEST_USER_NAME
+    >>> browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+Add a new Form Folder::
+
+    >>> browser.open(portal_url)
+    >>> browser.getLink('Form Folder').click()
+    >>> browser.getControl('Title').value = 'attachmentform'
+    >>> browser.getControl('Save').click()
+    >>> browser.url
+    '.../attachmentform/...'
+
+Add a File field::
+
+    >>> browser.getLink('File Field').click()
+    >>> browser.getControl('Field Label').value = 'attachment'
+    >>> browser.getControl('Save').click()
+
+And confirm that it renders properly::
+
+    >>> browser.open(portal_url + '/attachmentform')
+    >>> browser.url
+    '.../attachmentform...'
+    >>> print browser.contents
+    <!DOCTYPE...
+    ...
+    <input type="file"...name="attachment_file"...id="attachment_file"...
+    ...
+
+Submit the form with an attachment::
+
+    >>> portal.attachmentform.mailer.setRecipient_email('mdummy@address.com')
+    >>> import transaction
+    >>> transaction.commit()
+    >>> browser.getControl('Your E-Mail Address').value = 'test@example.com'
+    >>> browser.getControl('Subject').value = 'test'
+    >>> browser.getControl('Comments').value = 'PFG rocks!'
+    >>> browser.getControl(name='attachment_file').add_file(cStringIO.StringIO('file contents'), 'text/plain', 'test.txt')
+    >>> browser.getControl('Submit').click()
+    <sent mail from ...to ['mdummy@address.com']>
+    >>> 'Thanks for your input.' in browser.contents
+    True
+
+Make sure the attachment was included in the email message::
+
+    >>> app._p_jar.sync()
+    >>> portal.MailHost.msg.get_payload()[1].get_payload(decode=True)
+    'file contents'
+
+Excluded fields
+---------------
+
+Make sure the attachment is not included in the email if showAll is False and
+the file field is not listed in the mailer's showFields::
+
+    >>> portal.attachmentform.mailer.setShowAll(False)
+    >>> portal.MailHost.msg = None
+    >>> transaction.commit()
+
+    >>> browser.open(portal_url + '/attachmentform')
+    >>> browser.getControl('Your E-Mail Address').value = 'test@example.com'
+    >>> browser.getControl('Subject').value = 'test'
+    >>> browser.getControl('Comments').value = 'PFG rocks!'
+    >>> browser.getControl(name='attachment_file').add_file(cStringIO.StringIO('file contents'), 'text/plain', 'test.txt')
+    >>> browser.getControl('Submit').click()
+    <sent mail from ...to ['mdummy@address.com']>
+
+    >>> app._p_jar.sync()
+    >>> 'file contents' not in portal.MailHost.msg.get_payload(decode=True)
+    True
