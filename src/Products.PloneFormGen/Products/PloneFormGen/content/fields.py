@@ -1000,6 +1000,10 @@ class HtmlTextField(TextField):
     def getContentType(self, instance, fromBaseUnit=True):
         return 'text/html'
 
+    def getAccessor(self, context):
+        name = self.getName()
+        return context.get(name).getFgDefault
+
 
 class FGRichTextField(BaseFormField):
     """ Rich-text (visual editor) field """
