@@ -68,7 +68,7 @@ def get_member_profiles(container):
             profiles['by_email'][email] = mp
         else:
             mps_without_email.append(mp)
-        profiles['by_id'][id_] = mp
+#        profiles['by_id'][id_] = mp
     return profiles
     
 
@@ -93,8 +93,9 @@ def Command(app):
                 "Please call this script with -O param. "
                 "E.g. {}".format(USAGE))
         idx = 0
-        tot = len(profiles['by_id'])
-        for user in api.user.get_users():
+        users = api.user.get_users()
+        tot = len(users)
+        for user in users:
             idx += 1
             mp = None
             email = user.getProperty('email')
@@ -103,31 +104,19 @@ def Command(app):
             else:
                 mp = profiles['by_email'].get(email)
             if mp:
+                del profiles['by_email'][email]
                 totals['found_by_email'] += 1
-            else:
-                mp = profiles['by_id'].get(user.id)
-                if mp:
-                    totals['found_by_id'] += 1
-                else:
-                    logger.error("{idx}/{tot}: User doesn't have a member profile yet: {id}".format(id=user.id,idx=idx,tot=tot))
-                    totals['missing_mp'] += 1
-                    continue
-            creator = mp.Creator()
-            if creator != user.id:
-                mp.setCreators([user.id])
-                mp.reindexObject()
-                logger.warning("{idx}/{tot}: Fixing content creator: {id}".format(id=user.id, idx=idx,tot=tot))
-                continue
-            ownership_infos = mp.owner_info()
-            if ownership_infos['id'] == user.id:
-                logger.warning("{idx}/{tot}: Member profile already belongs to the corresponding user, skip it: {id}".format(id=user.id, idx=idx,tot=tot))
-                totals['good_mp_ownership'] += 1
-                continue
-            portal.plone_utils.changeOwnershipOf(mp, user.id)
-#            mp.changeOwnership(user, recursive=True)
-            mp.reindexObjectSecurity()
-            logger.warning("{idx}/{tot}: Fixing member profile ownership: [userid: {id}] [mp: {mp}]".format(id=user.id, idx=idx, mp=mp.absolute_url_path(), tot=tot))
-            totals['fixed_mp_ownership'] += 1
+#            else:
+#                mp = profiles['by_id'].get(user.id)
+#                if mp:
+#                    totals['found_by_id'] += 1
+#                else:
+#                    logger.error("{idx}/{tot}: User doesn't have a member profile yet: {id}".format(id=user.id,idx=idx,tot=tot))
+#                    totals['missing_mp'] += 1
+#                    continue
+    mp_ids = [m.getId() for m in profiles['by_email'].values()]
+    import pdb;pdb.set_trace()
+    mps_dir.manage_delObjects(mp_ids)
     for k in totals:
         logger.warning('Total {k}: {tot}'.format(k=k, tot=totals[k]))
 

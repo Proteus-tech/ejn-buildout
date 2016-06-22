@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+import csv
 import argparse
 import logging
+from plone import api
+from DateTime import DateTime
 
 
 USAGE = ("./bin/instance -O<plone_site_id> run scripts/fix_member_profiles_ownership.py "
@@ -26,6 +29,10 @@ parser.add_argument(
 
 params = parser.parse_args()
 
+old_users = {}
+users = api.user.get_users()
+DEFAULT_LOGIN_TIME = DateTime('2000/01/01 00:00:00 US/Pacific')
+ONE_DAY_AGO_LOGIN_TIME = DateTime('2016/05/21 00:00:00 US/Pacific')
 
 try:  # pyflakes
     import app
@@ -81,6 +88,7 @@ def Command(app):
         'found_by_email': 0,
         'found_by_id': 0,
         'users_without_email': 0,
+        'new_users': 0,
     }
     with api.env.adopt_user(username=params.admin_user):
         portal = getSite()
@@ -94,40 +102,61 @@ def Command(app):
                 "E.g. {}".format(USAGE))
         idx = 0
         tot = len(profiles['by_id'])
-        for user in api.user.get_users():
+        with open('users.csv', 'rb') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
+            for row in spamreader:
+                fullname, email, last_login, description = row
+                tmp = {
+                    'fullname': fullname,
+                    'email': email,
+                    'last_login': last_login,
+                    'description': description
+                }
+                old_users[email] = tmp
+        
+        new_users = {
+            'no_login': [],
+            'login': []
+        }
+        
+        idx = 0
+        tot = len(users)
+        portal = getSite()
+        mps_dir = portal['directory']
+        profiles = get_member_profiles(mps_dir)
+        for usr in users:
             idx += 1
-            mp = None
-            email = user.getProperty('email')
-            if not email or email == '':
-                totals['users_without_email'] += 1
-            else:
+            print '{idx}/{tot}'.format(idx=idx, tot=tot)
+            import pdb;pdb.set_trace()
+            if usr.getProperty('email') not in old_users:
+                email = usr.getProperty('email')
+                last_login =  usr.getProperty('last_login_time')
                 mp = profiles['by_email'].get(email)
-            if mp:
-                totals['found_by_email'] += 1
-            else:
-                mp = profiles['by_id'].get(user.id)
-                if mp:
-                    totals['found_by_id'] += 1
-                else:
-                    logger.error("{idx}/{tot}: User doesn't have a member profile yet: {id}".format(id=user.id,idx=idx,tot=tot))
-                    totals['missing_mp'] += 1
+                if last_login >= ONE_DAY_AGO_LOGIN_TIME or (mp and mp.creation_date >= ONE_DAY_AGO_LOGIN_TIME):
+                    print 'user registered in the last day'
+                    totals['new_users'] += 1
                     continue
-            creator = mp.Creator()
-            if creator != user.id:
-                mp.setCreators([user.id])
-                mp.reindexObject()
-                logger.warning("{idx}/{tot}: Fixing content creator: {id}".format(id=user.id, idx=idx,tot=tot))
-                continue
-            ownership_infos = mp.owner_info()
-            if ownership_infos['id'] == user.id:
-                logger.warning("{idx}/{tot}: Member profile already belongs to the corresponding user, skip it: {id}".format(id=user.id, idx=idx,tot=tot))
-                totals['good_mp_ownership'] += 1
-                continue
-            portal.plone_utils.changeOwnershipOf(mp, user.id)
-#            mp.changeOwnership(user, recursive=True)
-            mp.reindexObjectSecurity()
-            logger.warning("{idx}/{tot}: Fixing member profile ownership: [userid: {id}] [mp: {mp}]".format(id=user.id, idx=idx, mp=mp.absolute_url_path(), tot=tot))
-            totals['fixed_mp_ownership'] += 1
+                if last_login == DEFAULT_LOGIN_TIME:
+                    print 'NEW user'
+                    new_users['no_login'].append(usr)
+            else:
+                print 'OLD user'
+            #new_users['login'].append(usr)
+        idx = 0
+        #tot = len(new_users['no_login'] + new_users['login'])
+        tot = len(new_users['no_login'])
+        #for usr in new_users['no_login'] + new_users['login']:
+        for usr in new_users['no_login']:
+            email = usr.getProperty('email')
+            print '{idx}/{tot}: removing user: {email}'.format(
+                idx=idx, tot=tot, email=email)
+            idx += 1
+            mp = profiles['by_email'].get(email)
+            if mp:
+                mps_dir.manage_delObjects([mp.getId()])
+            api.user.delete(user=usr)
+            if idx % 100 == 0:
+                transaction.commit()
     for k in totals:
         logger.warning('Total {k}: {tot}'.format(k=k, tot=totals[k]))
 
