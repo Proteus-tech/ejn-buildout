@@ -297,6 +297,8 @@ MemberProfileSchema['description'].widget.visible={'edit':'hidden', 'view':'hidd
 MemberProfileSchema['dateOfBirth'].widget.visible={'edit':'hidden', 'view':'hidden'}
 MemberProfileSchema['citizenship'].widget.visible={'edit':'hidden', 'view':'hidden'}
 MemberProfileSchema['countriesOfResidence'].widget.visible={'edit':'hidden', 'view':'hidden'}
+MemberProfileSchema['phoneTwo'].widget.visible={'edit':'hidden', 'view':'hidden'}
+MemberProfileSchema['fax'].widget.visible={'edit':'hidden', 'view':'hidden'}
 
 
 schemata.finalizeATCTSchema(MemberProfileSchema, moveDiscussion=False)
