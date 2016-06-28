@@ -56,3 +56,10 @@ media_types = (
     'Data',
     'Multimedia',
 )
+
+genders = (
+    'Male',
+    'Female',
+    'Other',
+    'I choose not to say',
+)

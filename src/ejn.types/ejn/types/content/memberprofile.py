@@ -14,6 +14,7 @@ from ejn.types.vocabs import media_types
 from ejn.types.vocabs import site_themes
 from ejn.types.vocabs import sharing_roles
 from ejn.types.vocabs import site_regions
+from ejn.types.vocabs import genders
 
 from ejn.types.interfaces import IMemberProfile
 from ejn.types.config import PROJECTNAME
@@ -85,7 +86,8 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
            ),
 
   atapi.StringField('gender',
-            widget=atapi.StringWidget(label="Gender"),
+            widget=atapi.SelectionWidget(label="Gender"),
+            vocabulary=genders,
             ),
 
   atapi.DateTimeField('dateOfBirth',
