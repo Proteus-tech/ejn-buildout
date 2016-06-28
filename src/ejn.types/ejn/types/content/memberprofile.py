@@ -8,6 +8,8 @@ from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes.configuration import zconf
 
+import pytz
+
 from ejn.types import typesMessageFactory as _
 from ejn.types.vocabs import occupations
 from ejn.types.vocabs import media_types
@@ -235,8 +237,9 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             ),
 
   atapi.StringField('timezoneName',
-            widget=atapi.StringWidget(label="Timezone"),
+            widget=atapi.SelectionWidget(label="Timezone"),
             schemata='contact',
+            vocabulary=pytz.all_timezones,
             ),
 
   atapi.StringField('timezoneNum',
@@ -299,6 +302,7 @@ MemberProfileSchema['citizenship'].widget.visible={'edit':'hidden', 'view':'hidd
 MemberProfileSchema['countriesOfResidence'].widget.visible={'edit':'hidden', 'view':'hidden'}
 MemberProfileSchema['phoneTwo'].widget.visible={'edit':'hidden', 'view':'hidden'}
 MemberProfileSchema['fax'].widget.visible={'edit':'hidden', 'view':'hidden'}
+MemberProfileSchema['timezoneNum'].widget.visible={'edit':'hidden', 'view':'hidden'}
 
 
 schemata.finalizeATCTSchema(MemberProfileSchema, moveDiscussion=False)
