@@ -159,7 +159,7 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             ),
 
   atapi.BooleanField('passport',
-              widget=atapi.BooleanWidget(label="Holds a passport valid?"),
+              widget=atapi.BooleanWidget(label="Valid passport"),
               schemata='professional info',
               ),
 
