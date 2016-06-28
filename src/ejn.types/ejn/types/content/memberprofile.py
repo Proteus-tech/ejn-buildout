@@ -107,6 +107,11 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             vocabulary=occupations,
             ),
 
+  atapi.StringField('jobTitle',
+            searchable=1,
+            widget=atapi.StringWidget(label="Job title",),
+            ),
+
   atapi.StringField('organization',
             widget=atapi.StringWidget(label="Organization name"),
             schemata='professional info',
