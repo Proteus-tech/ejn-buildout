@@ -101,18 +101,6 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             widget=atapi.IntegerWidget(label="Birth Year",),
             ),
 
-  atapi.StringField('city',
-             searchable=1,
-             widget=atapi.StringWidget(label="City"),
-             schemata='professional info',
-             ),
-
-  atapi.StringField('country',
-             searchable=1,
-             widget=atapi.StringWidget(label="Country"),
-             schemata='professional info',
-             ),
-
   atapi.StringField('occupation',
             widget=atapi.SelectionWidget(label="Occupation"),
             schemata='professional info',
@@ -141,6 +129,19 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             widget=atapi.StringWidget(label="Circulation/audience size"),
             schemata='professional info',
             ),
+
+  atapi.StringField('city',
+             searchable=1,
+             widget=atapi.StringWidget(label="City"),
+             schemata='professional info',
+             ),
+
+  atapi.StringField('country',
+             searchable=1,
+             widget=atapi.StringWidget(label="Country"),
+             schemata='professional info',
+             ),
+
 
   atapi.StringField('citizenship',
             widget=atapi.StringWidget(label="Country of Citizenship"),
@@ -289,6 +290,8 @@ MemberProfileSchema['title'].widget.visible={'edit':'hidden', 'view':'hidden'}
 MemberProfileSchema['title'].required=False
 MemberProfileSchema['description'].widget.visible={'edit':'hidden', 'view':'hidden'}
 MemberProfileSchema['dateOfBirth'].widget.visible={'edit':'hidden', 'view':'hidden'}
+MemberProfileSchema['citizenship'].widget.visible={'edit':'hidden', 'view':'hidden'}
+MemberProfileSchema['countriesOfResidence'].widget.visible={'edit':'hidden', 'view':'hidden'}
 
 
 schemata.finalizeATCTSchema(MemberProfileSchema, moveDiscussion=False)
