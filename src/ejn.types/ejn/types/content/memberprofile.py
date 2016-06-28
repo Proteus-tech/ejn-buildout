@@ -117,6 +117,12 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
              schemata='professional info',
              ), 
 
+  atapi.StringField('country',
+             searchable=1,
+             widget=atapi.StringWidget(label="Organization country"),
+             schemata='professional info',
+             ),
+
   atapi.LinesField('mediaTypes',
             widget=atapi.MultiSelectionWidget(label="Media type",
                                               format="checkbox"),
@@ -187,12 +193,6 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
              widget=atapi.StringWidget(label="Personal URL"),
              schemata='contact',
              ), 
-             
-  atapi.StringField('country',
-             searchable=1,
-             widget=atapi.StringWidget(label="Media House Country"),
-             schemata='contact',
-             ),
 
   atapi.StringField('skypeUser',
             searchable=1,
