@@ -97,6 +97,10 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
                                         ),
             ),
 
+  atapi.IntegerField('birthYear',
+            widget=atapi.IntegerWidget(label="Birth Year",),
+            ),
+
   atapi.StringField('city',
              searchable=1,
              widget=atapi.StringWidget(label="City"),
@@ -284,6 +288,7 @@ MemberProfileSchema['subject'].widget.label = 'Other interests'
 MemberProfileSchema['title'].widget.visible={'edit':'hidden', 'view':'hidden'}
 MemberProfileSchema['title'].required=False
 MemberProfileSchema['description'].widget.visible={'edit':'hidden', 'view':'hidden'}
+MemberProfileSchema['dateOfBirth'].widget.visible={'edit':'hidden', 'view':'hidden'}
 
 
 schemata.finalizeATCTSchema(MemberProfileSchema, moveDiscussion=False)
