@@ -45,6 +45,7 @@ occupations = (
     'Government official',
     'Grantmaker',
     'Non-governmental organization',
+    ' ',
 )
 
 
