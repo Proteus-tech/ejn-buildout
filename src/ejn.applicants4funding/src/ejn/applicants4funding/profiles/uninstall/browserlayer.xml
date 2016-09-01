@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+      name="ejn.applicants4funding"
+      remove="true"
+      />
+</layers>

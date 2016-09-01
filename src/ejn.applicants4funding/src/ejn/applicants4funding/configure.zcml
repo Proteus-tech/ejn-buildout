@@ -1,0 +1,45 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="ejn.applicants4funding">
+
+  <i18n:registerTranslations directory="locales" />
+
+  <includeDependencies package="." />
+
+  <adapter
+    name="pfg_funding_extender"
+    factory=".extender.PFGExtender"
+    provides="archetypes.schemaextender.interfaces.ISchemaExtender" />
+
+  <adapter name="fundingCategory" factory=".indexers.pfg_funding_category" />
+  <adapter name="fundingCategory" factory=".indexers.default_funding_category" />
+
+  <utility
+    name="ejn.applicants4funding.fundingRegisteredTypes"
+    component=".vocabularies.fundingRegisteredTypesFactory"
+    />
+
+  <include package=".browser" />
+
+  <plone:behavior
+    title="EJN funding"
+    description="Add EJN applicants for funding fields"
+    provides=".behavior.IEJNFunding"
+    factory=".behavior.EJNFunding"
+    for="plone.dexterity.interfaces.IDexterityContent"
+    marker=".behavior.IEJNFunding"
+    />
+
+  <subscriber
+    for=".interfaces.IFundingReqBase
+         zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    handler=".events.funding_added"
+    />
+
+  <include file="profiles.zcml" />
+
+</configure>

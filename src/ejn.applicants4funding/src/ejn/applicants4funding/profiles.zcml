@@ -1,0 +1,41 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="ejn.applicants4funding">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="ejn.applicants4funding"
+      directory="profiles/default"
+      description="Installs the ejn.applicants4funding add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="ejn.applicants4funding-postInstall"
+      title="ejn.applicants4funding post_install import step"
+      description="Post install import step from ejn.applicants4funding"
+      handler=".setuphandlers.post_install">
+  </genericsetup:importStep>
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="ejn.applicants4funding"
+      directory="profiles/uninstall"
+      description="Uninstalls the ejn.applicants4funding add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="ejn.applicants4funding-uninstall"
+      title="ejn.applicants4funding uninstall import step"
+      description="Import step run during ininstalling ejn.applicants4funding"
+      handler=".setuphandlers.uninstall">
+  </genericsetup:importStep>
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="ejn.applicants4funding-hiddenprofiles" />
+
+</configure>

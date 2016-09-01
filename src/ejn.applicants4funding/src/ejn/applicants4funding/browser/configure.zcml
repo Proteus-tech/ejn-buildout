@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="ejn.applicants4funding">
+
+  <browser:resourceDirectory
+    name="ejn.applicants4funding"
+    layer="ejn.applicants4funding.interfaces.IEjnApplicants4FundingLayer"
+    directory="static"
+    />
+
+  <browser:page
+    name="view"
+    for="..interfaces.IFundingReqBase"
+    permission="zope2.View"
+    class=".fundingbase_view.FundingBaseView"
+    template="fundingbase_view.pt"
+    />
+
+
+</configure>

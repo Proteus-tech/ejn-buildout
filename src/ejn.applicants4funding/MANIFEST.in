@@ -1,0 +1,4 @@
+graft src/ejn
+graft docs
+include *.rst
+global-exclude *.pyc
