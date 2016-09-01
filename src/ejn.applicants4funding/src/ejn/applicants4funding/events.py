@@ -7,7 +7,6 @@ from zExceptions import Redirect
 from .interfaces import IFundingReqBase
 
 
-
 def funding_added(context, event):
     catalog = api.portal.get_tool(name='portal_catalog')
     user = api.user.get_current()
