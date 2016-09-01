@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import transaction
 from plone import api
 from zExceptions import Forbidden
+from zExceptions import Redirect
 from .interfaces import IFundingReqBase
 
 
@@ -13,7 +15,8 @@ def funding_added(context, event):
     portal_type = context.portal_type
     results = catalog(
         portal_type=portal_type,
-        Creator=userid
+        Creator=userid,
+        sort_on='created',
     )
     if results.actual_result_count > 1:
         message = 'User %s already have a %s content' % (
@@ -23,5 +26,5 @@ def funding_added(context, event):
             message=message, request=context.REQUEST,
             type='error'
         )
-        # transaction.abort()
-        raise(Forbidden(message))
+        transaction.abort()
+        raise Redirect(results[0].getURL())
