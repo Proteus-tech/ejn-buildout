@@ -14,7 +14,8 @@ class FundingBaseView(DefaultView):
         funding_types = get_funding_types(context)
         forms = catalog(
             object_provides=IPloneFormGenForm.__identifier__,
-            fundingCategory=[t.id for t in funding_types]
+            #fundingCategory=[t.id for t in funding_types]
+            fundingCategory=context.portal_type
         )
         links = []
         for form in forms:
