@@ -99,7 +99,7 @@ MemberProfileSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
                                         ),
             ),
 
-  atapi.IntegerField('birthYear',
+  atapi.StringField('birthYear',
             widget=atapi.IntegerWidget(label="Birth Year",),
             ),
 
