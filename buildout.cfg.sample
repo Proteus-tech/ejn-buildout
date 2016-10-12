@@ -1,2 +1,10 @@
 [buildout]
 extends = development.cfg
+
+[config]
+zeo-address = 0.0.0.0:8090
+instance-address = 0.0.0.0:8080
+instance1-address = 0.0.0.0:8081
+instance2-address = 0.0.0.0:8082
+instance3-address = 0.0.0.0:8083
+instance4-address = 0.0.0.0:8084
