@@ -18,5 +18,4 @@
     template="fundingbase_view.pt"
     />
 
-
 </configure>

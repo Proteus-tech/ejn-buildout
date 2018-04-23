@@ -37,3 +37,4 @@ class FundingBaseView(DefaultView):
                     url=form.getURL(),
                 ))
         return links
+

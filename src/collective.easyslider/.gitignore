@@ -5,6 +5,7 @@
 .egg-info
 PKG-INFO
 collective.easyslider.egg-info/*
+build
 
 
 *.gz

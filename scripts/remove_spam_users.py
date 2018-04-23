@@ -102,17 +102,17 @@ def Command(app):
                 "E.g. {}".format(USAGE))
         idx = 0
         tot = len(profiles['by_id'])
-        with open('users.csv', 'rb') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
-            for row in spamreader:
-                fullname, email, last_login, description = row
-                tmp = {
-                    'fullname': fullname,
-                    'email': email,
-                    'last_login': last_login,
-                    'description': description
-                }
-                old_users[email] = tmp
+#        with open('users.csv', 'rb') as csvfile:
+#            spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
+#            for row in spamreader:
+#                fullname, email, last_login, description = row
+#                tmp = {
+#                    'fullname': fullname,
+#                    'email': email,
+#                    'last_login': last_login,
+#                    'description': description
+#                }
+#                old_users[email] = tmp
         
         new_users = {
             'no_login': [],
@@ -127,7 +127,6 @@ def Command(app):
         for usr in users:
             idx += 1
             print '{idx}/{tot}'.format(idx=idx, tot=tot)
-            import pdb;pdb.set_trace()
             if usr.getProperty('email') not in old_users:
                 email = usr.getProperty('email')
                 last_login =  usr.getProperty('last_login_time')

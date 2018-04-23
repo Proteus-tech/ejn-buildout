@@ -2,11 +2,14 @@ import csv
 from plone import api
 from zope.component.hooks import getSite
 from DateTime import DateTime
+from datetime import datetime, timedelta
+
 
 users = api.user.get_users()
 old_users = {}
 DEFAULT_LOGIN_TIME = DateTime('2000/01/01 00:00:00 US/Pacific')
-ONE_DAY_AGO_LOGIN_TIME = DateTime('2016/05/21 00:00:00 US/Pacific')
+d = datetime.today() - timedelta(days=1)
+ONE_DAY_AGO_LOGIN_TIME = DateTime(d)
 
 def timeit(method):
 
@@ -75,7 +78,6 @@ for usr in users:
     if last_login == DEFAULT_LOGIN_TIME:
         new_users['no_login'].append(usr)
         continue
-    import pdb;pdb.set_trace()
     new_users['login'].append(usr)
 
 
