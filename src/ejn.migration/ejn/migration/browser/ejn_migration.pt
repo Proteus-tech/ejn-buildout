@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+
+<metal:main fill-slot="main">
+
+            <fieldset>
+                <legend>EJN Migration</legend>
+
+                1. Generate a CSV file with all the users registered before 2013 by scrapping their email addresses based on crossing user credentials and the associated user profiles with URLs that has only numbers after the last slash;
+                <br/>
+
+                <a target="_blank" class="button" tal:attributes="href python:context.portal_url()+'/ejn_migration?run_step=step1'">
+                     Run step 1
+                </a>
+                <br/>
+
+2. Generate a CSV file with all the users that never logged in;
+<br/>
+
+ <a target="_blank" class="button" tal:attributes="href python:context.portal_url()+'/ejn_migration?run_step=step2'">
+                     Run step 2
+                </a>
+                <br/>
+ 
+
+3. Remove all the users that appear in both CSV files and generate a third CSV file based on this crossing;
+<br/>
+
+ <a target="_blank" class="button" tal:attributes="href python:context.portal_url()+'/ejn_migration?run_step=step3'">
+                     Run step 3
+                </a>
+                <br/>
+ 
+
+4. Roughly go through this list and check if the legit users that were erased when Proteus ran their script are still there;
+<br/>
+ <a target="_blank" class="button" tal:attributes="href python:context.portal_url()+'/ejn_migration?run_step=step4'">
+                     Run step 4
+                </a>
+                <br/>
+
+  </fieldset>
+
+
+</metal:main>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="ejn.migration">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+          for="*"
+          name="ejn_migration"
+          permission="zope2.Public"
+          template="ejn_migration.pt"
+          class=".ejnmigration.EjnMigration"
+          />
+
+
+</configure>

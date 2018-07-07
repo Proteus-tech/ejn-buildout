@@ -1,0 +1,296 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+    <div metal:fill-slot="main">
+      <tal:def define="roles python:context.getVocabs()['sharing_roles'];
+                       authenticator python:context.restrictedTraverse('@@authenticator');
+                       token python:authenticator.token();
+                       member context/@@plone_portal_state/member;
+                       perms python:context.restrictedTraverse('@@get_user_perms');">
+
+    <h1 tal:content="context/Title">James Fahn</h1>
+
+
+    <script src="/portal_skins/custom/permission_widget.js"></script>
+
+    <div class="profile-box" tal:condition="python:perms()['bioSharing']">
+      <div class="permission_widget" tal:condition="context/id"
+                                     tal:define="sharing context/getBioSharing; 
+                                                 section string:bio;">
+        <button>Visible to: <span tal:content="sharing">EJN staff</span></button>
+        <ul>
+          <tal:rep repeat="role roles">
+            <li tal:condition="python:sharing != role">
+              <a href="#" tal:content="role"
+                 tal:attributes="href string:${context/absolute_url}/updateSharing?section=${section}&sharing=${role}&_authenticator=${token}"></a>
+            </li>
+          </tal:rep>
+        </ul>
+      </div>
+
+      <h2>Biography</h2>
+
+      <div class="profile-head" tal:define="image here/image_preview|nothing">
+        <img class="profile-pic" src="" tal:attributes="src string:${context/absolute_url}/image_preview">
+
+      <div class="field">
+          <div class="field-item" tal:content="structure context/getProfile"></div>
+      </div>
+
+        <div class="field">
+          <div class="label">Area of Environmental Journalism Interest</div>
+          <div class="field-item">
+            <metal:field use-macro="python:here.widget('interests', mode='view')"></metal:field>
+          </div>
+        </div>
+
+      <div class="field">
+          <div class="label">Additional Areas of Environmental Journalism Interest</div>
+          <div class="field-item" tal:define="subj context/Subject">
+            <span tal:repeat="item subj">
+              <span tal:replace="item"></span><span class="comma">,</span>
+            </span>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+    <div class="profile-box" tal:condition="python:perms()['proSharing']">
+      <div class="permission_widget" tal:define="sharing context/getProSharing;
+                                                 section string:pro;">
+      <button>Visible to: <span tal:content="sharing">EJN staff</span></button>
+        <ul>
+          <tal:rep repeat="role roles">
+            <li tal:condition="python:sharing != role">
+              <a href="#" tal:content="role"
+                 tal:attributes="href string:${context/absolute_url}/updateSharing?section=${section}&sharing=${role}&_authenticator=${token}"></a>
+            </li>
+          </tal:rep>
+        </ul>
+      </div>
+      <h2>Professional</h2>
+
+      <div class="field">
+        <div class="label">City</div>
+        <div class="field-item" tal:content="context/getCity">Washington</div>
+      </div>
+
+      <div class="field">
+        <div class="label">Country</div>
+        <div class="field-item"  tal:content="context/getCountry">United States of America</div>
+      </div>
+
+      <div class="field">
+          <div class="label">Occupation</div>
+          <div class="field-item" tal:content="context/getOccupation"></div>
+      </div>
+
+      <div class="field">
+          <div class="label">Job Title</div>
+          <div class="field-item" tal:content="context/getJobTitle"></div>
+      </div>
+
+
+      <div class="field">
+          <div class="label">Media Type</div>
+          <div class="field-item" tal:content='python:str(context.getMediaTypes())'></div>
+      </div>
+
+      <div class="field">
+          <div class="label">Organization Name</div>
+          <div class="field-item" tal:content="context/getOrganization"></div>
+      </div>
+
+      <div class="field">
+          <div class="label">Organization Website</div>
+          <div class="field-item" tal:content="context/getOrgURL"></div>
+      </div>
+
+      <div class="field">
+          <div class="label">Language</div>
+          <div class="field-item" tal:content="context/getLanguagesSpoken">English</div>
+        </div>
+
+      <div class="field">
+          <div class="label">Birth Year</div>
+          <div class="field-item"  tal:content="context/getBirthYear">1969</div>
+      </div>
+
+      <div class="field">
+          <div class="label">Gender</div>
+          <div class="field-item"  tal:content="context/getGender">Male</div>
+      </div>
+
+      <div class="field">
+          <div class="label">Holds a passport valid?</div>
+          <div class="field-item" tal:content="context/getPassport">Yes.</div>
+        </div>
+
+
+
+    </div>
+
+    <div class="profile-box" tal:condition="python:perms()['contactSharing']">
+      <div class="permission_widget" tal:define="sharing context/getContactSharing;
+                                                  section string:contact;">
+        <button>Visible to: <span tal:content="sharing">EJN staff</span></button>
+        <ul>
+          <tal:rep repeat="role roles">
+            <li tal:condition="python:sharing != role">
+              <a href="#" tal:content="role"
+                 tal:attributes="href string:${context/absolute_url}/updateSharing?section=${section}&sharing=${role}&_authenticator=${token}"></a>
+            </li>
+
+          </tal:rep>
+        </ul>
+      </div>
+      <h2>Contact</h2>
+
+      <div class="field">
+          <div class="label">Email</div>
+          <div class="field-item" tal:content="structure context/getEmail">jfahn@internews.org</div>
+        </div>
+
+      <div class="field">
+          <div class="label">Personal URL</div>
+          <div class="field-item">
+            <a href="http://earthjournalism.net/"
+                tal:content="structure context/getPersonalURL"
+                tal:attributes="href context/getPersonalURL">http://earthjournalism.net/</a>
+          </div>
+      </div>
+
+        <div class="field">
+          <div class="label">Phone Number</div>
+          <div class="field-item" tal:content="structure context/getPhone">+1 234 5432</div>
+        </div>
+
+      <div class="field">
+          <div class="label">Skype username</div>
+          <div class="field-item" tal:content="structure context/getSkypeUser">skype_username</div>
+      </div>
+
+      <div class="field">
+          <div class="label">Twitter username</div>
+          <div class="field-item" tal:content="structure context/getTwitterUser">@twitter</div>
+      </div>
+
+      <div class="field">
+          <div class="label">Timezone</div>
+          <div class="field-item" tal:content="context/getTimezoneName">America/New_York</div>
+        </div>
+
+
+        <div class="field">
+            <div class="label">Other Communication Network</div>
+            <div class="field-item" tal:content="structure context/getComNetworkOther">skype_username</div>
+        </div>
+
+        <div class="field">
+            <div class="label">Other Communication Network User ID</div>
+            <div class="field-item" tal:content="structure context/getComNetworkOtherID">skype_username</div>
+        </div>
+
+        <div class="field">
+            <div class="label">Preferred Contact Method</div>
+            <div class="field-item" tal:content="context/getPreferredCommunication">America/New_York</div>
+          </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="profile-box" tal:define="proj_uids context/get_member_program_uids;
+                                         projs     python:context.portal_catalog.searchResults(UID=proj_uids, portal_type='Program');">
+      
+      <h2>Program Affiliation</h2>
+
+      <section class="nc">
+      <article class="ns ns-type--picture ns-vol--med" tal:repeat="proj projs">
+      <tal:def define="obj proj/getObject">
+
+        <a href="#" tal:attributes="href obj/absolute_url">
+          <div class="ns__hd">
+            <h5 tal:content="obj/getLocation">Global</h5>
+            <div class="ns__img">
+              <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${obj/absolute_url}/image_threetwosix">
+            </div>
+          </div>
+          <div class="ns__bd">
+            <h4 tal:content="obj/pretty_title_or_id">Citizen Science &amp; Sensors</h4>
+          </div>
+        </a>
+      </tal:def>
+      </article>
+      </section>
+
+
+    </div>
+
+
+
+
+        <tal:authorContent define="author context/getEmail|nothing;
+                                   creator context/Creator;
+                                   creators python:(author,creator);
+                                   author_content python:context.portal_catalog.searchResults(dict(Creator=creators, sort_on='created', sort_order='reverse'))[:10];"
+                                           condition="author_content">
+
+    <div class="visualClear"><!-- --></div>
+
+            <h4 i18n:translate="heading_author_content">
+                Latest content created by this user
+            </h4>
+
+            <div metal:define-macro="user_content_listing">
+            <table class="vertical metadata"
+                   summary="Lists content written by an author grouped by content type"
+                   i18n:attributes="summary summary_author_content_list;">
+                <tal:repeat repeat="item author_content">
+                    <tr>
+                        <th tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
+                            tal:content="python:toLocalizedTime(item.Date)"
+                            style="white-space: nowrap">
+                            Date
+                        </th>
+                        <td>
+                            <a href="" tal:attributes="href item/getURL"
+                               tal:content="item/pretty_title_or_id">title</a>
+                        </td>
+                    </tr>
+                </tal:repeat>
+            </table>
+            </div>
+
+            <p>
+            <a href=""
+               tal:attributes="href string:/search?Creator=${author}&amp;sort_on=created&amp;sort_order=reverse"
+               i18n:translate="go_to_search_author_content">
+                All content created by
+                <span i18n:name="user" tal:omit-tag="" tal:content="string:${context/getNameFirst} ${context/getNameLast}"/>&hellip;
+            </a>
+            </p>
+
+        </tal:authorContent>
+
+    </tal:def>
+    </div>
+
+</body>
+</html>
