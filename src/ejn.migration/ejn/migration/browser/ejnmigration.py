@@ -98,7 +98,7 @@ class EjnMigration(BrowserView):
         scrapping their email addresses based on crossing user credentials and the associated user profiles with URLs that has only numbers after the last slash;
         """
         result = []
-        headers = ['username', 'email', 'user_link', 'user_profile_link']
+        headers = ['username', 'email', 'user_link', 'user_profile_link', 'last_login_time']
         users = api.user.get_users()
         count = 0
         total = len(users)
@@ -112,6 +112,11 @@ class EjnMigration(BrowserView):
             print count, total, user_profile_link
             url = user.absolute_url().replace('http://localhost:8080/Plone/', 'https://www.earthjournalism.net/')
             user_profile_link = user_profile_link.replace('http://localhost:8080/Plone/', 'https://www.earthjournalism.net/')
-            result.append([user.getId(), user.getProperty('email'), url, user_profile_link])
+            last_login_time = user.getProperty('last_login_time')
+            if last_login_time:
+                last_login_time = last_login_time.strftime('%Y-%m-%d %H:%M:%S')
+            else:
+                last_login_time = str(last_login_time)
+            result.append([user.getId(), user.getProperty('email'), url, user_profile_link, last_login_time])
         data = get_xls_file_with_result(result=result, headers=headers)
         return data
