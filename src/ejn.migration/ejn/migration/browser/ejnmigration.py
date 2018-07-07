@@ -114,7 +114,10 @@ class EjnMigration(BrowserView):
             user_profile_link = user_profile_link.replace('http://localhost:8080/Plone/', 'https://www.earthjournalism.net/')
             last_login_time = user.getProperty('last_login_time')
             if last_login_time:
-                last_login_time = last_login_time.strftime('%Y-%m-%d %H:%M:%S')
+                if hasattr(last_login_time, 'strftime'):
+                    last_login_time = last_login_time.strftime('%Y-%m-%d %H:%M:%S')
+                else:
+                    last_login_time = str(last_login_time)
             else:
                 last_login_time = str(last_login_time)
             result.append([user.getId(), user.getProperty('email'), url, user_profile_link, last_login_time])
