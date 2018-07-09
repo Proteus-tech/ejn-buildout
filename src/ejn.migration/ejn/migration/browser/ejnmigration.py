@@ -7,6 +7,11 @@ import datetime
 from openpyxl.cell import get_column_letter
 from plone import api
 from ejn.migration import migrationMessageFactory as _
+import os
+from openpyxl import load_workbook as open_workbook  #
+
+import ejn.migration as base_xls_path
+import transaction
 
 def get_xls_file_with_result(result, headers, filename_prefix=''):
     filename = filename_prefix + 'data-%s.xlsx' % datetime.datetime.now().strftime('%Y-%m-prepared-on-%d%H%M%S')
@@ -62,6 +67,9 @@ class EjnMigration(BrowserView):
             self.request.response.setHeader("Content-type", "application/vnd.ms-excel")
             self.request.response.setHeader("Content-disposition", "attachment;filename=%s" % filename)
             return self.run_step_one()
+        if self.context.REQUEST.get('delete_users_marked_yes_in_xls', '') == 'yes':
+            self.delete_users_marked_yes_in_xls()
+            return 'Done'
         return self.render()
 
     def get_user_profile(self, member):
@@ -123,3 +131,40 @@ class EjnMigration(BrowserView):
             result.append([user.getId(), user.getProperty('email'), url, user_profile_link, last_login_time])
         data = get_xls_file_with_result(result=result, headers=headers)
         return data
+
+    def delete_users_marked_yes_in_xls(self):
+        dir_name_old_vdex = os.path.dirname(base_xls_path.__file__)
+        pjoin = os.path.join
+        old_vdex_path = pjoin(dir_name_old_vdex, 'browser')
+        book = open_workbook(old_vdex_path + '/step1_file_with_last_login_time_dev2_reviewed.xlsx')
+        sheet = book.get_sheet_by_name('data')
+        usernames_to_delete = {}
+        for index, row in enumerate(sheet.rows):
+            if index == 0:
+                continue
+            username = row[0].value
+            # import pdb;pdb.set_trace()
+            if not usernames_to_delete.has_key(username):
+                if row[5].value == 'yes':
+                    usernames_to_delete[username] = [row[0].value, row[2].value, row[3].value, row[5].value]
+        # import pdb;pdb.set_trace()
+        users = api.user.get_users()
+        usernames_to_delete_names = usernames_to_delete.keys()
+        count = 1
+        total = len(usernames_to_delete_names)
+        portal = api.portal.get()
+        for userobj in users:
+            if userobj.getId() in usernames_to_delete_names:
+
+                # import pdb;pdb.set_trace()
+                count += 1
+                api.user.delete(user=userobj)
+                profile_paths = usernames_to_delete.get(userobj.getId())[2].split('https://www.earthjournalism.net/directory/')
+                profile_path = profile_paths[1]
+                obj_profile = portal['directory'][profile_path]
+                api.content.delete(obj=obj_profile)
+                self.context.plone_log([userobj, obj_profile])
+                if count % 100 == 0:
+                    self.context.plone_log('done %s out of total %s' % (str(count), str(total)))
+                    transaction.commit()
+        return usernames_to_delete
