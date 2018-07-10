@@ -1,5 +1,5 @@
 from Products.Five.browser import BrowserView
-
+import time
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 import openpyxl
@@ -132,6 +132,16 @@ class EjnMigration(BrowserView):
         data = get_xls_file_with_result(result=result, headers=headers)
         return data
 
+    def remove_user(self, email):
+        """Remove subscriber. We can not use `api.user.delete` as, by
+        default, it tries to remove member areas and local roles; the
+        later consumes a lot of memory and is not necessary for us.
+        """
+        membership_tool = api.portal.get_tool('portal_membership')
+        with api.env.adopt_roles(['Manager']):
+            membership_tool.deleteMembers(
+                [email], delete_memberareas=True, delete_localroles=False)
+
     def delete_users_marked_yes_in_xls(self):
         dir_name_old_vdex = os.path.dirname(base_xls_path.__file__)
         pjoin = os.path.join
@@ -153,12 +163,13 @@ class EjnMigration(BrowserView):
         count = 1
         total = len(usernames_to_delete_names)
         portal = api.portal.get()
+        time_start = time.time()
         for userobj in users:
             if userobj.getId() in usernames_to_delete_names:
 
                 # import pdb;pdb.set_trace()
                 count += 1
-                api.user.delete(user=userobj)
+                self.remove_user(email=userobj.getId())
                 profile_paths = usernames_to_delete.get(userobj.getId())[2].split('https://www.earthjournalism.net/directory/')
                 profile_path = profile_paths[1]
                 obj_profile = portal['directory'][profile_path]
@@ -166,5 +177,11 @@ class EjnMigration(BrowserView):
                 self.context.plone_log([userobj, obj_profile])
                 if count % 100 == 0:
                     self.context.plone_log('done %s out of total %s' % (str(count), str(total)))
+                    deltatime = time.time() - time_start
+                    deltatime_minutes = deltatime / 60
+                    percentage = float(count) / total
+                    compleetion_time_minutes = 1 / percentage * deltatime / 60 - deltatime_minutes
+                    self.context.plone_log("timedelta minutes: %s  number %s of %s expected compleetion in %s minutes" %
+                                           (deltatime_minutes, count, total, compleetion_time_minutes))
                     transaction.commit()
         return usernames_to_delete
