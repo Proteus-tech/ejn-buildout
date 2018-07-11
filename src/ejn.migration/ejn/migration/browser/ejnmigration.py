@@ -169,9 +169,9 @@ class EjnMigration(BrowserView):
 
                 # import pdb;pdb.set_trace()
                 count += 1
-                if count < 62000:
-                    self.context.plone_log('skip %s' % str(count))
-                    continue
+                # if count < 62000:
+                #    self.context.plone_log('skip %s' % str(count))
+                #    continue
                 self.remove_user(email=userobj.getId())
                 profile_link = usernames_to_delete.get(userobj.getId())
                 if profile_link:
