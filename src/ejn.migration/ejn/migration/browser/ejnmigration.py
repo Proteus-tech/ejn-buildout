@@ -158,10 +158,12 @@ class EjnMigration(BrowserView):
                 if row[5].value == 'yes':
                     usernames_to_delete[username] = [row[0].value, row[2].value, row[3].value, row[5].value]
         # import pdb;pdb.set_trace()
+        self.context.plone_log('geting users...')
         users = api.user.get_users()
         usernames_to_delete_names = usernames_to_delete.keys()
         count = 1
         total = len(users)
+        self.context.plone_log(total)
         portal = api.portal.get()
         time_start = time.time()
         for userobj in users:
@@ -173,9 +175,9 @@ class EjnMigration(BrowserView):
                 #    self.context.plone_log('skip %s' % str(count))
                 #    continue
                 self.remove_user(email=userobj.getId())
-                profile_link = usernames_to_delete.get(userobj.getId())
+                profile_link = usernames_to_delete.get(userobj.getId())[2]
                 if profile_link:
-                    profile_paths = usernames_to_delete.get(userobj.getId())[2].split('https://www.earthjournalism.net/directory/')
+                    profile_paths = profile_link.split('https://www.earthjournalism.net/directory/')
                     profile_path = profile_paths[1]
                     obj_profile = portal['directory'][profile_path]
                     api.content.delete(obj=obj_profile)
