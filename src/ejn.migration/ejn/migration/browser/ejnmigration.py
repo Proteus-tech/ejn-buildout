@@ -161,14 +161,14 @@ class EjnMigration(BrowserView):
         users = api.user.get_users()
         usernames_to_delete_names = usernames_to_delete.keys()
         count = 1
-        total = len(usernames_to_delete_names)
+        total = len(users)
         portal = api.portal.get()
         time_start = time.time()
         for userobj in users:
+            count += 1
             if userobj.getId() in usernames_to_delete_names:
 
                 # import pdb;pdb.set_trace()
-                count += 1
                 # if count < 62000:
                 #    self.context.plone_log('skip %s' % str(count))
                 #    continue
