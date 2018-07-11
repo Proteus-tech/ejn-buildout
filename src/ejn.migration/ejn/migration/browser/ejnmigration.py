@@ -169,12 +169,16 @@ class EjnMigration(BrowserView):
 
                 # import pdb;pdb.set_trace()
                 count += 1
+                if count < 62000:
+                    continue
                 self.remove_user(email=userobj.getId())
-                profile_paths = usernames_to_delete.get(userobj.getId())[2].split('https://www.earthjournalism.net/directory/')
-                profile_path = profile_paths[1]
-                obj_profile = portal['directory'][profile_path]
-                api.content.delete(obj=obj_profile)
-                self.context.plone_log([userobj, obj_profile])
+                profile_link = usernames_to_delete.get(userobj.getId())
+                if profile_link:
+                    profile_paths = usernames_to_delete.get(userobj.getId())[2].split('https://www.earthjournalism.net/directory/')
+                    profile_path = profile_paths[1]
+                    obj_profile = portal['directory'][profile_path]
+                    api.content.delete(obj=obj_profile)
+                    self.context.plone_log([userobj, obj_profile])
                 if count % 100 == 0:
                     self.context.plone_log('done %s out of total %s' % (str(count), str(total)))
                     deltatime = time.time() - time_start
