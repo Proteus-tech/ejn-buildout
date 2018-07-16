@@ -22,7 +22,7 @@
       class=".register.RegistrationForm"
       permission="cmf.AddPortalMember"
       layer="ejn.policy.interfaces.IBrowserLayer"
-      /> -->
+      /> 
 
     <browser:page
       name="new-user"
@@ -30,6 +30,8 @@
       class=".register.AddUserForm"
       permission="plone.app.controlpanel.UsersAndGroups"
       layer="ejn.policy.interfaces.IBrowserLayer"
-      />
+      /> 
+
+      -->
 
 </configure>
