@@ -80,9 +80,21 @@ except ImportError:
 class CaptchaRegistrationForm(RegistrationForm):
     """RegistrationForm with captcha functionality.
     """
-    def handle_join_success(self, data):
-        super(RegistrationForm, self).handle_join_success(data)
-        site = portal.get()
+    def action_join(self, action):
+        # super(RegistrationForm, self).action_join(action)
+        data, errors = self.extractData()
+
+        # extra password validation
+        self.validate_registration(action, data)
+
+        if action.form.widgets.errors:
+            self.status = self.formErrorsMessage
+            return
+
+        self.handle_join_success(data)
+
+        self._finishedRegister = True
+
         allfields = [f for f in self.fields]
         customfields = [f for f in allfields if f not in BASE_FIELDS]
         with api.env.adopt_roles('Manager'):
