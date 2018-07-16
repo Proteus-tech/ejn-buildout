@@ -58,7 +58,7 @@ class CaptchaRegistrationForm(RegistrationForm):
                 # Error messages are fed in by the captcha widget itself.
                 pass
 
-        # del data['captcha']  # delete, so that value isn't stored
+        del data['captcha']  # delete, so that value isn't stored
         # super(CaptchaRegistrationForm,
         #      self).validate_registration(action, data)
 
