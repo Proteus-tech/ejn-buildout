@@ -26,6 +26,7 @@ def add_member_profile(data, customfields=None):
     userid = data.get('user_id', data.get('username'))
 
     member = user.get(userid=userid)
+    import pdb;pdb.set_trace()
     site = portal.get()
     mps_dir_id = 'directory'
     mps_dir = hasattr(site, mps_dir_id) and site[mps_dir_id] or None
