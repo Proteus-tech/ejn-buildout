@@ -42,7 +42,7 @@ def add_member_profile(data, customfields=None):
     mdata['email'] = data.get('email', '')
     mdata['country'] = data.get('country')
     mdata['countriesOfResidence'] = data.get('country')
-    mdata['gender'] = data.getProperty('gender')
+    mdata['gender'] = data.get('gender')
     for f in customfields:
         if f in BASE_FIELDS or f in ['country', 'gender']:
             continue
