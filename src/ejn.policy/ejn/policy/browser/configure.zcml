@@ -6,6 +6,7 @@
 
     <include package="plone.autoform" />
     <include package="plone.app.controlpanel" />
+    <include package="plone.app.users"/>
 
     <!-- <browser:page -->
     <!--   name="member&#45;registration" -->
