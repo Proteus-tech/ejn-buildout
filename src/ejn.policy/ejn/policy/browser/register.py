@@ -1,6 +1,6 @@
 from plone.app.users.browser.register import AddUserForm as BaseAddUserForm
-from collective.registrationcaptcha.registrationform import CaptchaRegistrationForm as BaseRegistrationForm
-# from plone.app.users.browser.register import RegistrationForm as BaseRegistrationForm
+# from collective.registrationcaptcha.registrationform import CaptchaRegistrationForm as BaseRegistrationForm
+from plone.app.users.browser.register import RegistrationForm as BaseRegistrationForm
 
 from plone.api import portal
 from plone.api import content
