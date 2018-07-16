@@ -13,6 +13,7 @@ from zope.component import adapts
 from zope.component import queryUtility
 from zope.interface import Interface
 
+from plone import api
 from plone.api import portal
 from plone.api import content
 from plone.api import user
@@ -84,13 +85,15 @@ class CaptchaRegistrationForm(RegistrationForm):
         site = portal.get()
         allfields = [f for f in self.fields]
         customfields = [f for f in allfields if f not in BASE_FIELDS]
-        execute_under_special_role(
-            portal=site,
-            role='Manager',
-            function=add_member_profile,
-            data=data,
-            customfields=customfields
-        )
+        with api.env.adopt_roles('Manager'):
+            add_member_profile(data, customfields)
+        # execute_under_special_role(
+        #    portal=site,
+        #    role='Manager',
+        #    function=add_member_profile,
+        #    data=data,
+        #    customfields=customfields
+        # )
 
     def validate_registration(self, action, data):
 
