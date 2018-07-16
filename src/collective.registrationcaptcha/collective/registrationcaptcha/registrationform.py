@@ -34,7 +34,7 @@ class CaptchaRegistrationForm(RegistrationForm):
     """
 
     def validate_registration(self, action, data):
-        super(RegistrationForm, self).validate_registration(action, data)
+
         # CSRF protection
         CheckAuthenticator(self.request)
 
@@ -59,8 +59,8 @@ class CaptchaRegistrationForm(RegistrationForm):
                 pass
 
         del data['captcha']  # delete, so that value isn't stored
-        # super(CaptchaRegistrationForm,
-        #      self).validate_registration(action, data)
+        super(CaptchaRegistrationForm,
+              self).validate_registration(action, data)
 
 
 class CaptchaRegistrationFormExtender(extensible.FormExtender):
