@@ -62,17 +62,17 @@ class AddUserForm(BaseAddUserForm):
         add_member_profile(data, customfields=customfields)
 
 
-class RegistrationForm(BaseRegistrationForm):
-
-    def handle_join_success(self, data):
-        super(RegistrationForm, self).handle_join_success(data)
-        site = portal.get()
-        allfields = [f for f in self.fields]
-        customfields = [f for f in allfields if f not in BASE_FIELDS]
-        execute_under_special_role(
-            portal=site,
-            role='Manager',
-            function=add_member_profile,
-            data=data,
-            customfields=customfields
-        )
+# class RegistrationForm(BaseRegistrationForm):
+#
+#    def handle_join_success(self, data):
+#        super(RegistrationForm, self).handle_join_success(data)
+#        site = portal.get()
+#        allfields = [f for f in self.fields]
+#        customfields = [f for f in allfields if f not in BASE_FIELDS]
+#        execute_under_special_role(
+#            portal=site,
+#            role='Manager',
+#            function=add_member_profile,
+#            data=data,
+#            customfields=customfields
+#        )
