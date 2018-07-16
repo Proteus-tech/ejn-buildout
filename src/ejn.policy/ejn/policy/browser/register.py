@@ -16,7 +16,7 @@ BASE_FIELDS = [
 
 
 def add_member_profile(data, customfields=None):
-    userid = data.get('user_id', data.get('username'))
+    userid = data.get('login_name')
 
     member = user.get(userid=userid)
     site = portal.get()
