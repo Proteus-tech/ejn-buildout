@@ -15,14 +15,14 @@
     <!--   class=".registersettingspanel.RegistrationControlPanel" -->
     <!--   permission="plone.app.controlpanel.UsersAndGroups" -->
     <!--   /> -->
-    <!--  -->
+    <!--  
     <browser:page
       name="register"
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
       class=".register.RegistrationForm"
       permission="cmf.AddPortalMember"
       layer="ejn.policy.interfaces.IBrowserLayer"
-      />
+      /> -->
 
     <browser:page
       name="new-user"
