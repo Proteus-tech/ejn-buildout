@@ -26,8 +26,8 @@ BASE_FIELDS = [
 def add_member_profile(data, customfields=None):
     userid = data.get('user_id', data.get('username'))
 
-    member = user.get(userid=userid)
-    import pdb;pdb.set_trace()
+    # member = user.get(userid=userid)
+    # import pdb;pdb.set_trace()
     site = portal.get()
     mps_dir_id = 'directory'
     mps_dir = hasattr(site, mps_dir_id) and site[mps_dir_id] or None
@@ -35,18 +35,18 @@ def add_member_profile(data, customfields=None):
         return
 
     mdata = {}
-    fullname = member.getProperty('fullname')
+    fullname = data.get('fullname', '') # member.getProperty('fullname')
     fullname_parts = fullname.split()
     mdata['nameFirst'] = ' '.join(fullname_parts[:-1])
     mdata['nameLast'] = ' '.join(fullname_parts[-1:])
-    mdata['email'] = member.getProperty('email')
-    mdata['country'] = member.getProperty('country')
-    mdata['countriesOfResidence'] = member.getProperty('country')
-    mdata['gender'] = member.getProperty('gender')
+    mdata['email'] = data.get('email', '')
+    mdata['country'] = data.get('country')
+    mdata['countriesOfResidence'] = data.get('country')
+    mdata['gender'] = data.getProperty('gender')
     for f in customfields:
         if f in BASE_FIELDS or f in ['country', 'gender']:
             continue
-        mdata[f] = member.getProperty(f)
+        mdata[f] = data.get(f, '')
     mp = content.create(
         container=mps_dir,
         type='Member Profile',
