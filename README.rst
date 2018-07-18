@@ -1,6 +1,11 @@
 EJN buildout
 ============
-
+Prequisite:
+  $ sudo apt-get install varnish
+  $ sudo apt-get install python-docutils
+  $ sudo apt-get install libncurses5-dev libncursesw5-dev
+  $ sudo apt-get install -y pkg-config
+  $ sudo apt-get install libpcre3 libpcre3-dev libedit-dev
 Bootstrap::
 
   $ cp buildout.cfg.sample buildout.cfg
