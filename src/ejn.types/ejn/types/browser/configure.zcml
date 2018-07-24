@@ -49,4 +49,12 @@
           class=".get_project_team_uids.GetProjectTeamUIDsView"
           />
 
+  <browser:page
+          for="*"
+          name="download_applications"
+          permission="zope2.Public"
+          template="download_applications.pt"
+          class=".download_applications.DownloadApplications"
+          />
+
 </configure>
