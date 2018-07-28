@@ -52,7 +52,7 @@
   <browser:page
           for="*"
           name="download_applications"
-          permission="zope2.Public"
+          permission="cmf.ManagePortal"
           template="download_applications.pt"
           class=".download_applications.DownloadApplications"
           />
