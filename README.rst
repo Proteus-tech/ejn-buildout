@@ -20,3 +20,8 @@ For production::
   $ buildout
 
 Then make a supervisord init file and launch it.
+
+DEV3:
+ssh root@159.89.191.228
+bin/instance1 start
+bin/instance1 stop

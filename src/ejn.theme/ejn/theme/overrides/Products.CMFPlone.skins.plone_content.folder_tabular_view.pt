@@ -10,10 +10,8 @@
 
     <metal:content-core fill-slot="content-core">
       <div tal:condition="python:'applications' in context.getPhysicalPath()">
-          <div style="border:1px solid #ccc;margin-bottom:10px;padding:5px">
-            <legend>Download applications</legend>
-            <p>Click the link below to download all applications</p>
-            <a target="_blank" class="button btn context" tal:attributes="href python:context.absolute_url()+'/download_applications?download=yes'">
+          <div style="margin-bottom:10px;padding:5px">
+            <a target="_blank" style="text-decoration: underline;font-size:1.3em;" class="button btn context" tal:attributes="href python:context.absolute_url()+'/download_applications?download=yes'">
                      Download All applications
                 </a>
         </div>
