@@ -104,11 +104,13 @@ class DownloadApplications(BrowserView):
             if len(headers) == 0:
                 schema = getUtility(IDexterityFTI, name=app.portal_type).lookupSchema()
                 fields = getFieldsInOrder(schema)
+                headers.append('URL')
                 for field in fields:
                     headers.append(field[1].title)
 
+
             # import pdb;pdb.set_trace()
-            row = []
+            row = [app.absolute_url()]
             for field in fields:
                 val = getattr(app, field[0])
                 val = self.stringify_value(val, field[0], app)
