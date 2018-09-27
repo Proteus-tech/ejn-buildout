@@ -16,6 +16,7 @@ from plone.namedfile.file import NamedBlobFile
 
 from plone.dexterity.interfaces import IDexterityFTI
 from zope.component import getUtility
+from zope.schema import getFieldsInOrder
 
 
 def get_xls_file_with_result(result, headers, filename_prefix=''):
@@ -93,6 +94,7 @@ class DownloadApplications(BrowserView):
         """
         result = []
         headers = []
+        fields = []
         applications = self.context.objectValues()
         count = 0
         total = len(applications)
@@ -101,13 +103,15 @@ class DownloadApplications(BrowserView):
             count += 1
             if len(headers) == 0:
                 schema = getUtility(IDexterityFTI, name=app.portal_type).lookupSchema()
-                headers = schema.names()
+                fields = getFieldsInOrder(schema)
+                for field in fields:
+                    headers.append(field[1].title)
 
             # import pdb;pdb.set_trace()
             row = []
-            for field in headers:
-                val = getattr(app, field)
-                val = self.stringify_value(val, field, app)
+            for field in fields:
+                val = getattr(app, field[0])
+                val = self.stringify_value(val, field[0], app)
                 row.append(val)
             result.append(row)
         data = get_xls_file_with_result(result=result, headers=headers)
