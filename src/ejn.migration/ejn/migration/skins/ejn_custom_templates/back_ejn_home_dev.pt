@@ -1,0 +1,384 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+    <div metal:fill-slot="main"
+         tal:define="c python:context.portal_catalog;
+                     themes python:context.getThemes()[0];
+                     regions python:context.getRegions()[0];
+                     program context/getProgram;
+
+                     stories   python:c.searchResults(portal_type='Story',  review_state='featured', path='/Plone/stories', sort_on='getPubDateOriginal', sort_order='descending'  )[:10];
+
+                     geoproj python:c.searchResults(portal_type='Program',  review_state='published', progs='GeoJournalism', sort_on='created', sort_order='reverse');
+
+                     newest    python:c.searchResults(portal_type='Story',  review_state='published', path='/Plone/stories', sort_on='getPubDateOriginal', sort_order='descending'  )[0];
+
+                     resources python:c.searchResults(portal_type='Reporter Resource',  review_state='published', sort_on='getPubDateOriginal', sort_order='descending'  )[:5];
+
+                     theme_stories python:c.searchResults(portal_type='Story', themes=themes, review_state='published', path='/Plone/stories', sort_on='getPubDateOriginal', sort_order='descending'  )[:4];
+
+                     region_stories python:c.searchResults(portal_type='Story', regions=regions, review_state='published', path='/Plone/stories', sort_on='getPubDateOriginal', sort_order='descending'  )[:4];
+
+                     prog_stories python:context.getPublishedStoriesForProject(context=program)[:8];
+
+                     pstories  python:c.searchResults(portal_type='Program Update',  review_state='published', path='/Plone/program-updates', sort_on='getPubDateOriginal', sort_order='descending')[:3];
+
+                     slider    python:c.searchResults( portal_type='Slider Item',  
+                                                                            path={'query':'/Plone/slider','depth':1},
+                                                                            sort_on='getObjPositionInParent',   
+                                                                            review_state='published',                                      
+                                                                            );">
+
+
+        <section class="nc">
+
+          <div class="nc__hd">
+            <h3><a href="/stories" href="">Highlights</a></h3>
+            <a href="/stories" class="more">more</a>
+          </div>
+
+          <article class="ns ns-type--picture ns-vol--xl" tal:repeat="item python:stories[:1]">
+            <a href="" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="1.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview"/></div>
+              </div>
+              <div class="ns__bd">
+                <h5 tal:content="obj/getPublisher">Global</h5>
+                <h4 tal:content="item/pretty_title_or_id">The Human Dimensions of Climate Change Grant Program</h4>
+                <p class="dek" tal:content="item/Description">This series of grant opportunities represents a challenge to journalists throughout the world to facilitate a responsive information ecosystem that more accurately and holistically reflects climate challenges facing people across the planet. </p>
+              </div>
+            </a>
+          </article>
+
+
+          <article class="ns ns-type--picture ns-vol--lrg" tal:repeat="item python:stories[1:2]">
+            <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="/assets/images/sample/example2-preview-med-228x192px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h5 tal:content="obj/getPublisher">InfoAmazonia</h5>
+                <h4 tal:content="item/pretty_title_or_id">Noise Pollution: Managing the Challenge of Urban Sounds</h4>
+                <p class="byline">
+                  <i class="author" tal:content="obj/getByline">Rajiv Bhatia</i>,
+                  <i class="publication">Earth Journalism Network</i>
+                </p>
+                <p class="dateline" tal:define="pdo obj/getPubDateOriginal">
+                  <i class="date" tal:content="python:pdo.strftime('%e %B %Y')" tal:on-error="nothing">20 May 2014</i>
+                </p>
+              </div>
+            </a>
+          </article>
+
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item python:stories[2:7]">
+            <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <h5 tal:content="obj/getPublisher">EJN</h5>
+                <div class="ns__img">
+                  <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h4 tal:content="item/pretty_title_or_id">Shrinking rivers reshape rituals in Bangladesh</h4>
+              </div>
+            </a>
+          </article>
+
+          <article class="ns ns-type--text ns-vol--sml" tal:repeat="item python:stories[7:10]">
+            <a href="#" tal:attributes="href item/getURL">
+              <div class="ns__bd">
+                <h4 tal:content="item/pretty_title_or_id">Climate Change Mitigation: Reducing emissions from agriculture</h4>
+              </div>
+            </a>
+          </article>
+
+        </section>
+        <!-- end stories -->
+
+        <!-- start about ejn -->
+        <section class="nc nc--minimal">
+
+          <article class="ns ns-type--special" id="front-intro">
+            <div class="ns__wrapper">
+              <div class="ns__bd">
+                <h4>A global community of environmental journalists</h4>
+                <p><strong>Worldwide.</strong> EJN establishes networks of environmental journalists in countries where they don't exist, and build their capacity where they do.</p>
+                <p><strong>Collaborative.</strong> Member journalists from different locations use EJN to share information and ideas for how to add global context to their local stories.</p>
+                <p><strong>By Journalists, for Journalists.</strong> EJN's reporter resources are created specifically to support an audience of environmental journalists.</p>
+                <div class="action">
+                          <a href="/about" class="btn-alt">Learn more</a>
+                          <a href="/@@register" class="btn-action">Create an account</a>
+                        </div>
+              </div>
+            </div>
+          </article>
+
+        </section>
+        <!-- end about ejn -->
+
+
+        <!-- start reporter resources -->
+        <section class="nc">
+
+          <div class="nc__hd">
+            <h3><a href="/resources">Reporter Resources</a></h3>
+            <a href="/resources" class="more">more</a>
+          </div>
+
+          <article class="ns ns-type--picture ns-vol--xl" tal:repeat="item python:resources[:1]">
+            <a href="" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="1.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview"/></div>
+              </div>
+              <div class="ns__bd">
+                <h5 tal:content="obj/getPublisher">Global</h5>
+                <h4 tal:content="item/pretty_title_or_id">The Human Dimensions of Climate Change Grant Program</h4>
+                <p class="dek" tal:content="item/Description">This series of grant opportunities represents a challenge to journalists throughout the world to facilitate a responsive information ecosystem that more accurately and holistically reflects climate challenges facing people across the planet. </p>
+              </div>
+            </a>
+          </article>
+
+
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item python:resources[1:]">
+            <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <h5>Reporter Resource</h5>
+                <div class="ns__img">
+                  <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h4 tal:content="item/pretty_title_or_id">Climate Change Mitigation: Reducing emissions from agriculture</h4>
+              </div>
+            </a>
+          </article>
+
+        </section>
+        <!-- end reporter resources -->
+
+
+        <!-- start GeoJournalism -->
+        <section class="nc">
+          
+          <div class="nc__hd">
+            <h3><a href="/projects/category?c=GeoJournalism">GeoJournalism</a></h3>
+            <a href="/projects/category?c=GeoJournalism" class="more" >more</a>
+          </div>
+
+
+          <article class="ns ns-type--picture ns-vol--xl" tal:repeat="item python:geoproj[:1]">
+          <tal:def define="obj item/getObject">
+            <a href="#" tal:attributes="href item/getURL">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="/assets/images/sample/infoamazonia-468x192px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_foursixeight">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h5 tal:content="obj/getLocation">Global</h5>
+                <h4 tal:content="item/pretty_title_or_id">Climate Change Media Partnership</h4>
+                <p class="dek" tal:content="item/Description">
+                  Program kicker text appears here.
+                  Explain the program in brief.
+                </p>
+              </div>
+            </a>
+          </tal:def>
+          </article>
+
+
+
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item python:geoproj[1:5]">
+          <tal:def define="obj item/getObject">
+            <a href="#" tal:attributes="href item/getURL">
+              <div class="ns__hd">
+                <h5 tal:content="obj/getLocation">Global</h5>
+                <div class="ns__img">
+                  <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_threetwosix">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h4 tal:content="item/pretty_title_or_id">Citizen Science &amp; Sensors</h4>
+              </div>
+            </a>
+          </tal:def>
+          </article>
+
+
+        </section>
+        <!-- end GeoJournalism -->
+
+        <!-- start Program feature -->
+        <section class="nc">
+
+          <div class="nc__hd">
+            <h3><a href="" tal:content="program/pretty_title_or_id">Asia</a></h3>
+          </div>
+
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="obj prog_stories">
+            <a href="#" tal:attributes="href obj/absolute_url">
+              <div class="ns__hd">
+                <h5><span tal:replace="program/pretty_title_or_id">Asia</span></h5>
+                <div class="ns__img">
+                  <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${obj/absolute_url}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h4 tal:content="obj/pretty_title_or_id">Shrinking rivers reshape rituals in Bangladesh</h4>
+              </div>
+            </a>
+          </article>
+
+        </section>
+        <!-- end Program feature -->
+
+        <!-- start infoamazonia feature -->
+        <section class="nc" tal:condition="nothing">
+
+          <div class="nc__hd">
+            <h3><a href="#">InfoAmazonia</a></h3>
+          </div>
+
+          <article class="ns ns-type--picture ns-vol--xl">
+            <a href="#">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="/assets/images/sample/infoamazonia-468x192px.jpg" alt="">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h5>EJN Program</h5>
+                <h4>Shrinking rivers reshape rituals in Bangladesh</h4>
+                <p class="byline">
+                  <i class="author">Rajiv Bhatia</i>,
+                  <i class="publication">Earth Journalism Network</i>
+                </p>
+                <p class="dateline">
+                  <i class="date">20 May 2014</i>
+                </p>
+                <p class="dek">
+                  An entire way of life in riverine Bangladesh is changing with communities adapting their lives and religious rituals due to irregular water flow and drying rivers.
+                </p>
+              </div>
+            </a>
+          </article>
+
+        </section>
+        <!-- end infoamazonia feature -->    
+
+
+        <!-- start Theme feature -->
+        <section class="nc">
+
+          <div class="nc__hd">
+            <h3><a href="" tal:content="themes">Climate Change Media Partnership</a></h3>
+          </div>
+
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item theme_stories">
+            <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <h5><span tal:replace="themes">Climate Change Media Partnership</span></h5>
+                <div class="ns__img">
+                  <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h4 tal:content="item/pretty_title_or_id">Shrinking rivers reshape rituals in Bangladesh</h4>
+              </div>
+            </a>
+          </article>
+
+        </section>
+        <!-- end Theme feature -->
+
+        <!-- start Region feature -->
+        <section class="nc">
+
+          <div class="nc__hd">
+            <h3><a href="" tal:content="regions">Asia</a></h3>
+          </div>
+
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item region_stories">
+            <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <h5><span tal:replace="regions">Asia</span></h5>
+                <div class="ns__img">
+                  <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h4 tal:content="item/pretty_title_or_id">Shrinking rivers reshape rituals in Bangladesh</h4>
+              </div>
+            </a>
+          </article>
+
+        </section>
+        <!-- end Region feature -->
+
+
+        <!-- start program updates -->
+        <section class="nc">
+
+          <div class="nc__hd">
+            <h3><a href="#">Program Updates</a></h3>
+          </div>
+
+          <article class="ns ns-type--picture ns-vol--lrg" tal:repeat="item python:pstories[:1]">
+            <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject; program obj/getProgram;">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="/assets/images/sample/example2-preview-med-228x192px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h5 tal:content="program/pretty_title_or_id" tal:on-error="nothing">InfoAmazonia</h5>
+                <h4 tal:content="item/pretty_title_or_id">Noise Pollution: Managing the Challenge of Urban Sounds</h4>
+                <p class="byline">
+                  <i class="author" tal:content="obj/getByline">Rajiv Bhatia</i>,
+                  <i class="publication">Earth Journalism Network</i>
+                </p>
+                <p class="dateline" tal:define="pdo obj/getPubDateOriginal">
+                  <i class="date" tal:content="python:pdo.strftime('%e %B %Y')" tal:on-error="nothing">20 May 2014</i>
+                </p>
+              </div>
+            </a>
+          </article>
+
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item python:pstories[1:3]">
+            <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject; program obj/getProgram;">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="/assets/images/sample/example2-preview-med-228x192px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
+                </div>
+              </div>
+              <div class="ns__bd">
+                <h5 tal:content="program/pretty_title_or_id" tal:on-error="nothing">InfoAmazonia</h5>
+                <h4 tal:content="item/pretty_title_or_id">Noise Pollution: Managing the Challenge of Urban Sounds</h4>
+                <p class="byline">
+                  <i class="author" tal:content="obj/getByline">Rajiv Bhatia</i>,
+                  <i class="publication">Earth Journalism Network</i>
+                </p>
+                <p class="dateline" tal:define="pdo obj/getPubDateOriginal">
+                  <i class="date" tal:content="python:pdo.strftime('%e %B %Y')" tal:on-error="nothing">20 May 2014</i>
+                </p>
+              </div>
+            </a>
+          </article>
+
+        </section>        
+        <!-- end program updates -->
+
+
+
+    </div>
+
+</body>
+</html>
