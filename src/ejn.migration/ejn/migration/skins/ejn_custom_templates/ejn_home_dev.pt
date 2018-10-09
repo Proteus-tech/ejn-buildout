@@ -41,12 +41,25 @@
             <a href="/stories" class="more">more</a>
           </div>
 
+          <article class="ns ns-type--picture ns-vol--xl" tal:repeat="item python:stories[:1]">
+            <a href="" tal:attributes="href item/getURL" tal:define="obj item/getObject">
+              <div class="ns__hd">
+                <div class="ns__img">
+                  <img src="1.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview"/></div>
+              </div>
+              <div class="ns__bd">
+                <h5 tal:content="obj/getPublisher">Global</h5>
+                <h4 tal:content="item/pretty_title_or_id">The Human Dimensions of Climate Change Grant Program</h4>
+                <p class="dek" tal:content="item/Description">This series of grant opportunities represents a challenge to journalists throughout the world to facilitate a responsive information ecosystem that more accurately and holistically reflects climate challenges facing people across the planet. </p>
+              </div>
+            </a>
+          </article>
 
 
-          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item python:stories[0:8]">
+          <article class="ns ns-type--picture ns-vol--med" tal:repeat="item python:stories[1:9]">
             <a href="#" tal:attributes="href item/getURL" tal:define="obj item/getObject">
               <div class="ns__hd">
-                
+                <h5 tal:content="obj/getPublisher">Global</h5>
                 <div class="ns__img">
                   <img src="/assets/images/sample/marsh-326px.jpg" alt="" tal:attributes="src string:${item/getURL}/image_preview">
                 </div>
