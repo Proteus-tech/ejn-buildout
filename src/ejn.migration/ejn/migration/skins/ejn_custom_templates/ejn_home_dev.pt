@@ -193,7 +193,7 @@
         <section class="nc">
 
           <div class="nc__hd">
-            <h3><a href="" tal:content="program/pretty_title_or_id">Asia</a></h3>
+            <h3><a href="" tal:attributes="href python:program.absolute_url()" tal:content="program/pretty_title_or_id">Asia</a></h3>
           </div>
 
           <article class="ns ns-type--picture ns-vol--med" tal:repeat="obj prog_stories">
@@ -276,7 +276,7 @@
         <section class="nc">
 
           <div class="nc__hd">
-            <h3><a href="" tal:content="regions">Asia</a></h3>
+            <h3><a href="https://earthjournalism.net/projects/earth-journalism-network-asia-pacific-project"  tal:content="regions">Asia</a></h3>
           </div>
 
           <article class="ns ns-type--picture ns-vol--med" tal:repeat="item region_stories">
@@ -301,7 +301,7 @@
         <section class="nc">
 
           <div class="nc__hd">
-            <h3><a href="#">Program Updates</a></h3>
+            <h3><a href="https://earthjournalism.net/program-updates">Program Updates</a></h3>
           </div>
 
           <article class="ns ns-type--picture ns-vol--lrg" tal:repeat="item python:pstories[:1]">
