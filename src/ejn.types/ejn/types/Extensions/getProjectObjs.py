@@ -41,8 +41,8 @@ def getPublishedStoriesForProject(context):
         status = portal_workflow.getInfoFor(obj, 'review_state')
         if status in ['published', 'featured']:
             results.append(obj)
-            unsorted_result.append({'obj': obj, 'created': obj.created()})
-    sorted_result = sorted(unsorted_result, key=itemgetter('created'), reverse=True)
+            unsorted_result.append({'obj': obj, 'effective': obj.effective()})
+    sorted_result = sorted(unsorted_result, key=itemgetter('effective'), reverse=True)
     results = [x.get('obj') for x in sorted_result]
     return results
 
