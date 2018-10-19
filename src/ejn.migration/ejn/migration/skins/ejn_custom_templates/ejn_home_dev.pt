@@ -252,7 +252,7 @@
         <section class="nc">
 
           <div class="nc__hd">
-            <h3><a href="" tal:content="themes">Climate Change Media Partnership</a></h3>
+            <h3><a href="https://earthjournalism.net/projects/biodiversity-media-initiative" tal:content="themes">Climate Change Media Partnership</a></h3>
           </div>
 
           <article class="ns ns-type--picture ns-vol--med" tal:repeat="item theme_stories">
