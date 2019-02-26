@@ -6,7 +6,7 @@
 
     <notheme css:if-not-content="#visual-portal-wrapper"/>
 
-    <rules css:if-content="#visual-portal-wrapper">
+    <rules if-not-path="/belt-watch">
 
         <theme href="diazo_template.html" />
 
@@ -18,8 +18,8 @@
 
     </rules>
 
-    <rules css:if-content="#visual-portal-full">
-
+    <rules if-path="/belt-watch">
+    
         <theme href="diazo_template_full.html" />
 
         <xi:include href="rules/head.xml" />
