@@ -22,3 +22,4 @@ etc/
 eggs/
 src/uwosh.pfg.d2c/
 venv/
+local/

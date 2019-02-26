@@ -16,6 +16,18 @@
 
         <xi:include href="rules/footer.xml" />
 
-  </rules>
+    </rules>
+
+    <rules css:if-content="#visual-portal-full">
+
+        <theme href="diazo_template_full.html" />
+
+        <xi:include href="rules/head.xml" />
+
+        <xi:include href="rules/contents.xml" />
+
+        <xi:include href="rules/footer.xml" />
+
+    </rules>
 
 </rules>
