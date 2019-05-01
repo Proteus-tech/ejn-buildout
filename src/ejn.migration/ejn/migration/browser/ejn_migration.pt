@@ -6,6 +6,15 @@
 
 
 <metal:main fill-slot="main">
+  <h2>User download</h2>
+
+
+                <br/>
+
+                <a target="_blank" class="button" tal:attributes="href python:context.portal_url()+'/ejn_migration?download_users=yes'">
+                     User download
+                </a>
+                <br/>
 
             <fieldset>
                 <legend>EJN Migration</legend>

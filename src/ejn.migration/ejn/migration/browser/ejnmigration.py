@@ -12,6 +12,8 @@ from openpyxl import load_workbook as open_workbook  #
 
 import ejn.migration as base_xls_path
 import transaction
+from ejn.types.content.memberprofile import MemberProfileSchema
+
 
 def get_xls_file_with_result(result, headers, filename_prefix=''):
     filename = filename_prefix + 'data-%s.xlsx' % datetime.datetime.now().strftime('%Y-%m-prepared-on-%d%H%M%S')
@@ -57,11 +59,24 @@ def get_xls_file_with_result(result, headers, filename_prefix=''):
     data = fp.read()
     return data
 
+import six
+
+def make_smart_text(text, encoding='utf-8', errors='strict'):
+    try:
+        return text.decode('iso-8859-1').encode(encoding)
+    except:
+        return text
+
+
 class EjnMigration(BrowserView):
     render = ViewPageTemplateFile('ejn_migration.pt')
 
     def __call__(self):
-
+        if self.context.REQUEST.get('download_users', '')  == 'yes':
+            filename = 'all_users_with_profile.xlsx'
+            self.request.response.setHeader("Content-type", "application/vnd.ms-excel")
+            self.request.response.setHeader("Content-disposition", "attachment;filename=%s" % filename)
+            return self.run_download_users()
         if self.context.REQUEST.get('run_step', '') == 'step1':
             filename = 'step1_file.xlsx'
             self.request.response.setHeader("Content-type", "application/vnd.ms-excel")
@@ -72,7 +87,59 @@ class EjnMigration(BrowserView):
             return 'Done'
         return self.render()
 
-    def get_user_profile(self, member):
+    def run_download_users(self):
+        result = []
+        headers = ['fullname', 'email', 'gender', 'country']
+        # member_fields = MemberProfileSchema.fields()
+        # for field in member_fields:
+        #    headers.append(field.getName())
+
+        users = api.user.get_users()
+        count = 0
+        total = len(users)
+        limit = 100
+        for user in users:
+            count += 1
+            fname = user.getProperty('fullname')
+            if fname is None:
+                fname = user.getId()
+            fname = make_smart_text(fname)
+            result_row = [fname, user.getProperty('email'), user.getProperty('gender'), user.getProperty('country')]
+            result.append(result_row)
+            print count, total
+            if 1 == 2:
+                # import pdb;pdb.set_trace()
+                # if count > limit:
+                #    break
+                user_profile = self.get_user_profile(user, return_obj=True)
+
+                print count, total, user_profile
+                if user_profile:
+                    user_profile_link = user_profile.absolute_url()
+                else:
+                    user_profile_link = ''
+                url = user.absolute_url().replace('http://localhost:8080/Plone/', 'https://www.earthjournalism.net/')
+                user_profile_link = user_profile_link.replace('http://localhost:8080/Plone/', 'https://www.earthjournalism.net/')
+                last_login_time = user.getProperty('last_login_time')
+                if last_login_time:
+                    if hasattr(last_login_time, 'strftime'):
+                        last_login_time = last_login_time.strftime('%Y-%m-%d %H:%M:%S')
+                    else:
+                        last_login_time = str(last_login_time)
+                else:
+                    last_login_time = str(last_login_time)
+                result_row = [user.getId(), user.getProperty('email'), url, user_profile_link, last_login_time]
+                for field in member_fields:
+                    if user_profile:
+                        val = str(getattr(user_profile, field.accessor)())
+                    else:
+                        val = ''
+                    result_row.append(val)
+                result.append(result_row)
+        data = get_xls_file_with_result(result=result, headers=headers)
+        return data
+
+    def get_user_profile(self, member, return_obj=False):
         # from Products.CMFCore.utils import getToolByName
 
         cat = self.context.portal_catalog
@@ -91,13 +158,18 @@ class EjnMigration(BrowserView):
 
         if matches_by_userid >= 1:
             profile = results_by_userid[0]
+            if return_obj:
+                return profile.getObject()
             reurl = profile.getObject().absolute_url()
         elif matches_by_email >= 1:
             profile = results_by_email[0]
+            if return_obj:
+                return profile.getObject()
             reurl = profile.getObject().absolute_url()
         else:
             reurl = ''
-
+        if return_obj:
+            return None
         return reurl
 
     def run_step_one(self):
