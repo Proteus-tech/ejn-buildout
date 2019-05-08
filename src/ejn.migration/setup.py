@@ -56,7 +56,8 @@ setup(name='ejn.migration',
       zip_safe=False,
       install_requires=['setuptools',
                         # -*- Extra requirements: -*-
-                        'openpyxl'
+                        'openpyxl',
+                        'xlsxwriter'
                         ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),

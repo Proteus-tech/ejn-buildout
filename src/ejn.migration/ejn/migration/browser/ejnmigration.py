@@ -14,6 +14,23 @@ import ejn.migration as base_xls_path
 import transaction
 from ejn.types.content.memberprofile import MemberProfileSchema
 
+def get_xls_file_with_result_X(result, headers, filename_prefix=''):
+
+
+    import csv
+    filename = '/tmp/' + filename_prefix + 'data-%s.csv' % datetime.datetime.now().strftime('%Y-%m-prepared-on-%d%H%M%S')
+
+    with open(filename, mode='w') as employee_file:
+        employee_writer = csv.writer(employee_file, delimiter='$', quotechar='"', quoting=csv.QUOTE_ALL)
+        employee_writer.writerow(headers)
+        for row in result:
+            # import pdb;pdb.set_trace()
+            employee_writer.writerow(row)
+
+    fp = open('%s' % filename)
+    data = fp.read()
+    return data
+
 
 def get_xls_file_with_result(result, headers, filename_prefix=''):
     filename = filename_prefix + 'data-%s.xlsx' % datetime.datetime.now().strftime('%Y-%m-prepared-on-%d%H%M%S')
@@ -65,7 +82,7 @@ def make_smart_text(text, encoding='utf-8', errors='strict'):
     try:
         return text.decode('iso-8859-1').encode(encoding)
     except:
-        return text
+        return str(text)
 
 
 class EjnMigration(BrowserView):
@@ -85,7 +102,56 @@ class EjnMigration(BrowserView):
         if self.context.REQUEST.get('delete_users_marked_yes_in_xls', '') == 'yes':
             self.delete_users_marked_yes_in_xls()
             return 'Done'
+
+        if self.context.REQUEST.get('download_content', '')  == 'yes':
+            filename = 'all_content.csv'
+            self.request.response.setHeader("Content-type", "text/csv")
+            self.request.response.setHeader("Content-disposition", "attachment;filename=%s" % filename)
+            return self.run_download_all_content()
         return self.render()
+
+    def run_download_all_content(self):
+        headers = ['Title',
+                   'Description',
+                   'Hero image',
+                   'Body',
+                   'Themes',
+                   'Tags',
+                   'Regions',
+                   'Publisher',
+                   'Location',
+                   'Publisher URL',
+                   'By line', 'Publication date', 'Program']
+
+        result = api.content.find(context=self.context, portal_type='Story')
+        xldata = []
+        # import pdb;pdb.set_trace()
+        for row in result:
+            data_row = []
+            obj = row.getObject()
+            data_row.append(obj.Title())
+            data_row.append(obj.Description())
+            if obj.getImage():
+                data_row.append(obj.getImage().absolute_url())
+            else:
+                data_row.append("")
+            data_row.append(obj.getText())
+            data_row.append(str(obj.getThemes()))
+            data_row.append(str(obj.Subject()))
+            data_row.append(str(obj.getRegions()))
+            data_row.append(str(obj.getPublisher()))
+            data_row.append(str(obj.getLocation()))
+            data_row.append(str(obj.getPublisherURL()))
+            data_row.append(str(obj.getByline()))
+            data_row.append(str(obj.getPubDateOriginal()))
+            if obj.getProgram():
+                data_row.append(str(obj.getProgram().Title()))
+            else:
+                data_row.append("")
+            xldata.append(data_row)
+        data = get_xls_file_with_result_X(result=xldata, headers=headers)
+        return data
+
 
     def run_download_users(self):
         result = []
