@@ -111,7 +111,7 @@ class EjnMigration(BrowserView):
         return self.render()
 
     def run_download_all_content(self):
-        if self.context.REQUEST.get('type', '') == 'Story':
+        if self.context.REQUEST.get('type', '')in ['Story', 'Program Update', 'Reporter Resource']:
             headers = ['Title',
                        'Description',
                        'Hero image',
@@ -124,7 +124,7 @@ class EjnMigration(BrowserView):
                        'Publisher URL',
                        'By line', 'Publication date', 'Program']
 
-            result = api.content.find(context=self.context, portal_type='Story')
+            result = api.content.find(context=self.context, portal_type=self.context.REQUEST.get('type', ''))
             xldata = []
             # import pdb;pdb.set_trace()
             for row in result:

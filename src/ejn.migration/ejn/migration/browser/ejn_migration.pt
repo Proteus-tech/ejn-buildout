@@ -20,6 +20,16 @@
                 </a>
                 <br/>
 
+                <a target="_blank" class="button" tal:attributes="href python:context.absolute_url()+'/ejn_migration?download_content=yes&type=Program Update'">
+                     Content download Program Update
+                </a>
+                <br/>
+
+                <a target="_blank" class="button" tal:attributes="href python:context.absolute_url()+'/ejn_migration?download_content=yes&type=Reporter Resource'">
+                     Content download Reporter Resources
+                </a>
+                <br/>
+
 
   <h2>User download</h2>
 
