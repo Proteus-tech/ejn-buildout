@@ -111,44 +111,68 @@ class EjnMigration(BrowserView):
         return self.render()
 
     def run_download_all_content(self):
-        headers = ['Title',
-                   'Description',
-                   'Hero image',
-                   'Body',
-                   'Themes',
-                   'Tags',
-                   'Regions',
-                   'Publisher',
-                   'Location',
-                   'Publisher URL',
-                   'By line', 'Publication date', 'Program']
+        if self.context.REQUEST.get('type', '') == 'Story':
+            headers = ['Title',
+                       'Description',
+                       'Hero image',
+                       'Body',
+                       'Themes',
+                       'Tags',
+                       'Regions',
+                       'Publisher',
+                       'Location',
+                       'Publisher URL',
+                       'By line', 'Publication date', 'Program']
 
-        result = api.content.find(context=self.context, portal_type='Story')
-        xldata = []
-        # import pdb;pdb.set_trace()
-        for row in result:
-            data_row = []
-            obj = row.getObject()
-            data_row.append(obj.Title())
-            data_row.append(obj.Description())
-            if obj.getImage():
-                data_row.append(obj.getImage().absolute_url())
-            else:
-                data_row.append("")
-            data_row.append(obj.getText())
-            data_row.append(str(obj.getThemes()))
-            data_row.append(str(obj.Subject()))
-            data_row.append(str(obj.getRegions()))
-            data_row.append(str(obj.getPublisher()))
-            data_row.append(str(obj.getLocation()))
-            data_row.append(str(obj.getPublisherURL()))
-            data_row.append(str(obj.getByline()))
-            data_row.append(str(obj.getPubDateOriginal()))
-            if obj.getProgram():
-                data_row.append(str(obj.getProgram().Title()))
-            else:
-                data_row.append("")
-            xldata.append(data_row)
+            result = api.content.find(context=self.context, portal_type='Story')
+            xldata = []
+            # import pdb;pdb.set_trace()
+            for row in result:
+                data_row = []
+                obj = row.getObject()
+                data_row.append(obj.Title())
+                data_row.append(obj.Description())
+                if obj.getImage():
+                    data_row.append(obj.getImage().absolute_url())
+                else:
+                    data_row.append("")
+                data_row.append(obj.getText())
+                data_row.append(str(obj.getThemes()))
+                data_row.append(str(obj.Subject()))
+                data_row.append(str(obj.getRegions()))
+                data_row.append(str(obj.getPublisher()))
+                data_row.append(str(obj.getLocation()))
+                data_row.append(str(obj.getPublisherURL()))
+                data_row.append(str(obj.getByline()))
+                data_row.append(str(obj.getPubDateOriginal()))
+                if obj.getProgram():
+                    data_row.append(str(obj.getProgram().Title()))
+                else:
+                    data_row.append("")
+                xldata.append(data_row)
+        if self.context.REQUEST.get('type', '') == 'Program':
+            headers = ['Title',
+                       'Description',
+                       'Hero image',
+                       'Body',
+                       'Location']
+
+            result = api.content.find(context=self.context, portal_type='Program')
+            xldata = []
+            # import pdb;pdb.set_trace()
+            for row in result:
+                data_row = []
+                obj = row.getObject()
+                data_row.append(obj.Title())
+                data_row.append(obj.Description())
+                if obj.getImage():
+                    data_row.append(obj.getImage().absolute_url())
+                else:
+                    data_row.append("")
+                data_row.append(obj.getText())
+                data_row.append(str(obj.getLocation()))
+                xldata.append(data_row)
+
         data = get_xls_file_with_result_X(result=xldata, headers=headers)
         return data
 

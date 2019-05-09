@@ -10,8 +10,13 @@
 <h2>Content download</h2>
 <br/>
 
-                <a target="_blank" class="button" tal:attributes="href python:context.portal_url()+'/ejn_migration?download_content=yes'">
-                     Content download
+                <a target="_blank" class="button" tal:attributes="href python:context.absolute_url()+'/ejn_migration?download_content=yes&type=Story'">
+                     Content download Story
+                </a>
+                <br/>
+
+                <a target="_blank" class="button" tal:attributes="href python:context.absolute_url()+'/ejn_migration?download_content=yes&type=Program'">
+                     Content download Program
                 </a>
                 <br/>
 
