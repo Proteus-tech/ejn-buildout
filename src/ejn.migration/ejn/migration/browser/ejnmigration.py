@@ -111,7 +111,7 @@ class EjnMigration(BrowserView):
         return self.render()
 
     def run_download_all_content(self):
-        if self.context.REQUEST.get('type', '')in ['Story', 'Program Update', 'Reporter Resource', 'Program']:
+        if self.context.REQUEST.get('type', '')in ['Story', 'Program Update', 'Reporter Resource', 'Program', 'Opportunity']:
             result = api.content.find(context=self.context, portal_type=self.context.REQUEST.get('type', ''))
             xldata = []
             # import pdb;pdb.set_trace()
