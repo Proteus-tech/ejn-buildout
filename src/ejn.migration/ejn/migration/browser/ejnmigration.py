@@ -82,7 +82,11 @@ def make_smart_text(text, encoding='utf-8', errors='strict'):
     try:
         return text.decode('iso-8859-1').encode(encoding)
     except:
-        return str(text)
+        try:
+           return text.decode('utf-8').encode(encoding)
+        except: 
+            return text
+    return text
 
 
 class EjnMigration(BrowserView):
