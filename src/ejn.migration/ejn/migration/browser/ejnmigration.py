@@ -185,7 +185,7 @@ class EjnMigration(BrowserView):
                         val = ''
                     result_row.append(val)
                 result.append(result_row)
-        data = get_xls_file_with_result(result=result, headers=headers)
+        data = get_xls_file_with_result_X(result=result, headers=headers)
         return data
 
     def get_user_profile(self, member, return_obj=False):
