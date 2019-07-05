@@ -120,9 +120,10 @@ class EjnMigration(BrowserView):
             for row in result:
                 data_row = []
                 obj = row.getObject()
+                data_row.append(obj.absolute_url().replace('dev.earthjournalism.net', 'earthjournalism.net'))
                 if len(fields) == 0:
                     fields = obj.schema.fields()
-                    headers = [x.widget.label for x in fields]
+                    headers = ['URL'] + [x.widget.label for x in fields]
                 for field in fields:
                     val = getattr(obj, field.accessor)()
                     data_row.append(str(val))
