@@ -80,12 +80,13 @@ import six
 
 def make_smart_text(text, encoding='utf-8', errors='strict'):
     try:
+        return text.decode('utf-8').encode(encoding)
+    except:
+        pass
+    try:
         return text.decode('iso-8859-1').encode(encoding)
     except:
-        try:
-           return text.decode('utf-8').encode(encoding)
-        except: 
-            return text
+        return text
     return text
 
 
@@ -185,7 +186,7 @@ class EjnMigration(BrowserView):
                         val = ''
                     result_row.append(val)
                 result.append(result_row)
-        data = get_xls_file_with_result_X(result=result, headers=headers)
+        data = get_xls_file_with_result(result=result, headers=headers)
         return data
 
     def get_user_profile(self, member, return_obj=False):
