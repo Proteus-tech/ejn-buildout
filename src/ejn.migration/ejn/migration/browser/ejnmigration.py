@@ -14,8 +14,8 @@ import ejn.migration as base_xls_path
 import transaction
 from ejn.types.content.memberprofile import MemberProfileSchema
 
-def get_xls_file_with_result_X(result, headers, filename_prefix=''):
 
+def get_xls_file_with_result_X(result, headers, filename_prefix=''):
 
     import csv
     filename = '/tmp/' + filename_prefix + 'data-%s.csv' % datetime.datetime.now().strftime('%Y-%m-prepared-on-%d%H%M%S')
@@ -139,7 +139,7 @@ class EjnMigration(BrowserView):
 
     def run_download_users(self):
         result = []
-        headers = ['fullname', 'email', 'gender', 'country']
+        headers = ['fullname', 'email', 'gender', 'country', 'created', 'modified']
         # member_fields = MemberProfileSchema.fields()
         # for field in member_fields:
         #    headers.append(field.getName())
@@ -154,7 +154,12 @@ class EjnMigration(BrowserView):
             if fname is None:
                 fname = user.getId()
             fname = make_smart_text(fname)
-            result_row = [fname, user.getProperty('email'), user.getProperty('gender'), user.getProperty('country')]
+            created = user.created().strftime('%Y-%m-%d %H:%M:%S')
+            modified = user.modified().strftime('%Y-%m-%d %H:%M:%S')
+            if created == modified:
+                modified = ''
+            result_row = [fname, user.getProperty('email'), user.getProperty('gender'),
+                          user.getProperty('country'),created, modified]
             result.append(result_row)
             print count, total
             if 1 == 2:
