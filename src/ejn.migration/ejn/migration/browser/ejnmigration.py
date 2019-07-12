@@ -159,6 +159,9 @@ class EjnMigration(BrowserView):
         total = len(users)
         limit = 100
         for user in users:
+            if self.context.REQUEST('skip_before_may16'):
+                if user.created() < DateTime('2019-05-17'):
+                    continue
             count += 1
             fname = user.getProperty('fullname')
             if fname is None:
