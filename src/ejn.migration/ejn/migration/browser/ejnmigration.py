@@ -120,7 +120,7 @@ class EjnMigration(BrowserView):
         if self.context.REQUEST.get('type', '')in ['Story', 'Program Update', 'Reporter Resource', 'Program', 'Opportunity', 'Document']:
             date_range = {
                 'query': (
-                    DateTime('2019-05-17 00:00:00'),
+                    DateTime('2019-04-30 23:59:59'),
                     DateTime('2019-07-15 23:59:59'),
                 ),
                 'range': 'min:max',
@@ -160,7 +160,7 @@ class EjnMigration(BrowserView):
         limit = 100
         for user in users:
             if self.context.REQUEST.get('skip_before_may16'):
-                if user.created() < DateTime('2019-05-17'):
+                if user.created() < DateTime('2019-04-30'):
                     continue
             count += 1
             fname = user.getProperty('fullname')
