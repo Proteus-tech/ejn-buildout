@@ -134,8 +134,8 @@ class EjnMigration(BrowserView):
             for row in result:
                 data_row = []
                 obj = row.getObject()
-                url = obj.absolute_url().replace('dev.earthjournalism.net', 'earthjournalism.net')
-                url = url.replace('dev3.earthjournalism.net', 'earthjournalism.net')
+                url = obj.absolute_url().replace('old.earthjournalism.net', 'earthjournalism.net')
+                # url = url.replace('dev3.earthjournalism.net', 'earthjournalism.net')
                 data_row.append(url)
                 if len(fields) == 0:
                     fields = obj.schema.fields()
