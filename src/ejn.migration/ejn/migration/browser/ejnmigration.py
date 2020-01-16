@@ -118,14 +118,15 @@ class EjnMigration(BrowserView):
 
     def run_download_all_content(self):
         if self.context.REQUEST.get('type', '')in ['Story', 'Program Update', 'Reporter Resource', 'Program', 'Opportunity', 'Document']:
-            date_range = {
-                'query': (
-                    DateTime('2019-04-30 23:59:59'),
-                    DateTime('2019-07-15 23:59:59'),
-                ),
-                'range': 'min:max',
-            }
-            result = api.content.find(context=self.context, created=date_range, portal_type=self.context.REQUEST.get('type', ''))
+            # date_range = {
+            #    'query': (
+            #        DateTime('2019-04-30 23:59:59'),
+            #        DateTime('2019-07-15 23:59:59'),
+            #    ),
+            #    'range': 'min:max',
+            # }
+            # result = api.content.find(context=self.context, created=date_range, portal_type=self.context.REQUEST.get('type', ''))
+            result = api.content.find(context=self.context, portal_type=self.context.REQUEST.get('type', ''))
             xldata = []
             # import pdb;pdb.set_trace()
             headers = []
